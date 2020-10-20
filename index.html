@@ -16,46 +16,15 @@
         console.log('v3', d3version3.version)
         console.log('v6', d3version6.version)
     </script>
-    <style>
-        ul {
-            list-style-type: none;
-            margin: -8px;
-            padding: 0;
-            overflow: hidden;
-            background-color: #333;
-            height:39px;
-        }
-
-        li {
-            float: left;
-        }
-
-        li a {
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-        }
-
-        li a:hover {
-            background-color: #111;
-        }
-        body {
-            margin-top:0;
-        }
-        .viz-container {
-            margin: 15px;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body style="overflow: hidden;">
     <div>
-        <ul>
-            <li><a href="index.html">Visualization</a></li>
-            <li><a href="html/about.html">About</a></li>
-            <li><a href="html/documentation.html">Documentation</a></li>
-            <li><a href="html/video.html">Video</a></li>
+        <ul class="navbar">
+            <li class="navbar-item"><a href="index.html">Visualization</a></li>
+            <li class="navbar-item"><a href="html/about.html">About</a></li>
+            <li class="navbar-item"><a href="html/documentation.html">Documentation</a></li>
+            <li class="navbar-item"><a href="html/video.html">Video</a></li>
         </ul>
     </div>
     <div class="viz-container">
