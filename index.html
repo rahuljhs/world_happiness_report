@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://d3js.org/d3.v6.js"></script>
+    <script>
+        d3version6 = d3
+        window.d3 = null
+    </script>
+    <script src="https://d3js.org/d3.v3.js"></script>
+    <script>
+        d3version3 = d3
+        window.d3 = null
+        // test it worked
+        console.log('v3', d3version3.version)
+        console.log('v6', d3version6.version)
+    </script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body style="overflow: hidden;">
+    <div>
+        <ul class="navbar">
+            <li class="navbar-item"><a href="index.html">Visualization</a></li>
+            <li class="navbar-item"><a href="html/about.html">About</a></li>
+            <li class="navbar-item"><a href="html/documentation.html">Documentation</a></li>
+            <li class="navbar-item"><a href="html/video.html">Video</a></li>
+        </ul>
+    </div>
+    <div class="viz-container">
+        <svg id="world-map"></svg>
+        <svg id="line-chart"></svg>
+        <svg id="scatter-plot"></svg>
+    </div>
+
+
+    <script>
+        const files = [];
+        files.push(d3version6.csv("data/2015.csv"));
+        files.push(d3version6.csv("data/2016.csv"));
+        files.push(d3version6.csv("data/2017.csv"));
+        files.push(d3version6.csv("data/2018.csv"));
+        files.push(d3version6.csv("data/2019.csv"));
+
+        // dataHash contains all of the csv data and is keyed by a string the represents the year
+        const dataHash = {};
+
+        // load all data before importing the javascript files.  This will control the async nature of the d3.csv func
+        Promise.all(files).then((data) => {
+            data.forEach((dataFileContents, index) => {
+                dataHash[`201${index + 5}`] = dataFileContents;
+            })
+
+            // TODO: remove this console.log()
+            console.log(dataHash);
+        });
+
+
+    </script>
+    <script src="javascript/world_map.js" type="application/javascript"></script>
+    <script src="javascript/line_chart.js" type="application/javascript"></script>
+    <script src="javascript/scatter_plot.js" type="application/javascript"></script>
+</body>
+</html>
