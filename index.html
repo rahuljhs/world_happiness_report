@@ -41,9 +41,10 @@
         files.push(d3version6.csv("data/2017.csv"));
         files.push(d3version6.csv("data/2018.csv"));
         files.push(d3version6.csv("data/2019.csv"));
-
         // dataHash contains all of the csv data and is keyed by a string the represents the year
         const dataHash = {};
+
+        let tempMapData;  // DO NOT CHANGE THIS VALUE
 
         // load all data before importing the javascript files.  This will control the async nature of the d3.csv func
         Promise.all(files).then((data) => {
@@ -55,6 +56,7 @@
             console.log(dataHash);
         });
 
+        const worldMapPromise = d3version6.json('geo-countries/archive/countries.json');
 
     </script>
     <script src="javascript/world_map.js" type="application/javascript"></script>
