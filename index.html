@@ -16,6 +16,11 @@
         console.log('v3', d3version3.version)
         console.log('v6', d3version6.version)
     </script>
+    <style>
+        #world-map .country:hover {
+            fill: grey;
+        }
+    </style>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body style="overflow: hidden;">
@@ -28,7 +33,7 @@
         </ul>
     </div>
     <div class="viz-container">
-        <svg id="world-map"></svg>
+        <svg id="world-map" height="600px" width="600px"></svg>
         <svg id="line-chart"></svg>
         <svg id="scatter-plot"></svg>
     </div>
@@ -56,7 +61,10 @@
             console.log(dataHash);
         });
 
-        const worldMapPromise = d3version6.json('geo-countries/archive/countries.json');
+        // Converted countries_without_geo.json to countries.geojson
+        // original data (before conversion) - https://gist.github.com/jrrickard/8755532505a40f3b8317?short_path=c12ef4a
+        // conversion tool - https://mygeodata.cloud/result
+        const worldMapPromise = d3version6.json('data/countries.geojson');
 
     </script>
     <script src="javascript/world_map.js" type="application/javascript"></script>
