@@ -12,16 +12,9 @@
     <script>
         d3version3 = d3
         window.d3 = null
-        // test it worked
-        console.log('v3', d3version3.version)
-        console.log('v6', d3version6.version)
     </script>
-    <style>
-        #world-map .country:hover {
-            fill: grey;
-        }
-    </style>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles/index.css">
 </head>
 <body style="overflow: hidden;">
     <div>
@@ -46,10 +39,9 @@
         files.push(d3version6.csv("data/2017.csv"));
         files.push(d3version6.csv("data/2018.csv"));
         files.push(d3version6.csv("data/2019.csv"));
+
         // dataHash contains all of the csv data and is keyed by a string the represents the year
         const dataHash = {};
-
-        let tempMapData;  // DO NOT CHANGE THIS VALUE
 
         // load all data before importing the javascript files.  This will control the async nature of the d3.csv func
         Promise.all(files).then((data) => {

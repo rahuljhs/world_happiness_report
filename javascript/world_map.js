@@ -33,28 +33,18 @@ const createWorldMap = (mapData) => {
         .attr('fill', 'lightblue')
         .style('pointer-events', 'all')
     map
-        // .call(zoom)
         .selectAll('.country')
         .data(mapData.features)
-        // .data(mapData.features)
         .join('path')
         .attr('class', 'country')
         .attr('fill', 'white')
         .style('pointer-events', 'all')
         .style("stroke-width", ".3")
         .style('stroke', 'black')
-        .attr('d', feature => {
-            console.log(feature);
-            return pathGenerator(feature);
-        })
-        // .attr('d',  d3version6.geoPath())
+        .attr('d', feature => pathGenerator(feature))
         .style('width', `${worldMapWidth}px`)
         .style('height', `${worldMapHeight}px`)
         .style('border', 'solid black')
-
-
-
-
 }
 
 worldMapPromise.then(data => {
