@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -44,7 +44,7 @@
         const dataHash = {};
 
         // load all data before importing the javascript files.  This will control the async nature of the d3.csv func
-        Promise.all(files).then((data) => {
+        let allFilesPromise = Promise.all(files).then((data) => {
             data.forEach((dataFileContents, index) => {
                 dataHash[`201${index + 5}`] = dataFileContents;
             })
