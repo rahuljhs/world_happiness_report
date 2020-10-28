@@ -1,7 +1,7 @@
 const scatterPlotHeight = 400;
 const scatterPlotWidth = 400;
 
-var margin = { top: 20, bottom: 40, left: 40, right: 20 };
+var margin = { top: 20, bottom: 40, left: 50, right: 20 };
 
 var plotht = scatterPlotHeight - margin.top - margin.bottom;
 var plotwt = scatterPlotWidth - margin.left - margin.right;
@@ -100,14 +100,31 @@ const createScatterPlot = () => {
 
 
     //axes ticks
-    //y-axis <---- THIS IS NOT WORKING FOR SOME REASON
-    //var yAxisScale = d3.scaleLinear()
-    //    .domain([0, Math.ceil(ymax)])
-    //    .range([plotht + margin.top, margin.top]);
-    //var yAxis = d3.axisLeft()
-    //    .scale(yAxisScale);
-    //splot.append('g')
-    //    .call(yAxis);
+    //x-axis
+    var xAxisScale = d3version3.scale.linear()
+        .domain([0, Math.ceil(xmax)])
+        .range([margin.left, margin.left + plotwt]);
+    var xAxis = d3version3.svg.axis()
+        .scale(xAxisScale)
+        .orient("bottom")
+        .ticks(10);
+    splot.append('g')
+        .attr('class', 'axis')
+        .attr('transform', 'translate(0, ' + (margin.top + plotht)+ ')')
+        .call(xAxis);
+    //y-axis
+    var yAxisScale = d3version3.scale.linear()
+        .domain([0, Math.ceil(ymax)])
+        .range([plotht + margin.top, margin.top]);
+    var yAxis = d3version3.svg.axis()
+        .scale(yAxisScale)
+        .orient("left")
+        .ticks(10);
+    splot.append('g')
+        .attr('class', 'axis')
+        .attr('transform', 'translate(' + (margin.left) + ",0)")
+        .call(yAxis);
+
 
 }
 
