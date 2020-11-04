@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>World Happiness Report</title>
     <script src="https://d3js.org/d3.v6.js"></script>
     <script>
         d3version6 = d3
@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="styles/index.css">
 </head>
-<body style="overflow: hidden;">
+<body>
     <div>
         <ul class="navbar">
             <li class="navbar-item"><a href="index.html">Visualization</a></li>
@@ -25,11 +25,42 @@
             <li class="navbar-item"><a href="html/video.html">Video</a></li>
         </ul>
     </div>
+
+    <div class="filter">
+        <label for="year">Year :</label>
+        <select name="year" id="year">
+            <option value="2015" selected>2015</option>
+            <option value="2016">2016</option>
+            <option value="2017">2017</option>
+            <option value="2018">2018</option>
+            <option value="2019">2019</option>
+        </select>
+
+        <datalist id="attribute_options">
+            <option value="Happiness Score" selected>Happiness Score</option>
+            <option value="Economy (GDP per Capita)">Economy (GDP per Capita)</option>
+            <option value="Family">Family</option>
+            <option value="Health (Life Expectancy)">Health (Life Expectancy)</option>
+            <option value="Freedom">Freedom</option>
+            <option value="Trust (Government Corruption)">Trust (Government Corruption)</option>
+            <option value="Generosity">Generosity</option>
+            <option value="Dystopia Residual">Dystopia Residual</option>
+        </datalist>
+
+        <label for="attribute1">Attribute 1:</label>
+        <input name="attribute1" id="attribute1" list="attribute_options" value="Happiness Score">
+
+        <label for="attribute2">Attribute 2:</label>
+        <input name="attribute2" id="attribute2" list="attribute_options" value="Freedom">
+
+    </div>
+
     <div class="viz-container">
         <svg id="world-map" height="600px" width="600px"></svg>
         <svg id="line-chart"></svg>
         <svg id="scatter-plot"></svg>
     </div>
+
 
 
     <script>
