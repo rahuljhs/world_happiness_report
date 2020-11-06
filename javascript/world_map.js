@@ -4,9 +4,21 @@ const worldMapWidth = 600;
 // A lot of the map drawing was pull from https://medium.com/swlh/data-visualization-with-d3-world-map-aa03d68eb906
 const createWorldMap = (mapData) => {
     console.log(mapData);
+
+    // var gfg = d3
+    //     .geoMercator()
+    //     .scale(width / 2.5 / Math.PI)
+    //     .rotate([0, 0])
+    //     .center([0, 0])
+    //     .translate([width / 2, height / 2]);
+    //
     const projection = d3version6.geoMercator()
-        .fitSize([worldMapWidth, worldMapHeight], mapData)
-        .precision(100);
+        .scale(worldMapWidth / 2.5 / Math.PI)
+        .rotate([0, 0])
+        .center([0, 0])
+        .translate([worldMapWidth / 2, worldMapHeight / 2]);
+        // .fitSize([worldMapWidth, worldMapHeight], mapData)
+        // .precision(100);
     const pathGenerator = d3version6.geoPath().projection(projection);
 
     function handleZoom(event) {
@@ -36,7 +48,11 @@ const createWorldMap = (mapData) => {
         .selectAll('.country')
         .data(mapData.features)
         .join('path')
-        .attr('class', 'country')
+        .attr('class', d => {
+            const name = d['properties']['name']
+            const classifiedName = name.toLowerCase().replaceAll(' ', '-')
+            return `country ${d['properties']['id']} ${classifiedName}`
+        })
         .attr('fill', 'white')
         .style('pointer-events', 'all')
         .style("stroke-width", ".3")
