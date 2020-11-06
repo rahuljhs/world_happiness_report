@@ -22,11 +22,11 @@ const createWorldMap = (mapData) => {
 
     let zoom = d3version6.zoom()
         .scaleExtent([1, 10])
-        .on("zoom", handleZoom)
+        .on("zoom", handleZoom) 
 
     // This is my hacky way around the oceans not being paths.  Since they aren't defined (just empty space) zoom/pan won't
     // work when your mouse is pointed on the oceans.  This bounding box fixes that.
-    let data = [[0, 0], [0, worldMapHeight-12], [worldMapWidth, worldMapHeight-12], [worldMapWidth, 0]];
+    let data = [[40, 60], [40, worldMapHeight-60], [worldMapWidth-30, worldMapHeight-60], [worldMapWidth-30, 60]];
     let lineGenerator = d3version6.line();
     let pathString = lineGenerator(data);
 
