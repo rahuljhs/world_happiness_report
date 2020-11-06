@@ -5,18 +5,13 @@ const worldMapWidth = 600;
 const createWorldMap = (mapData) => {
     console.log(mapData);
 
-    // var gfg = d3
-    //     .geoMercator()
-    //     .scale(width / 2.5 / Math.PI)
-    //     .rotate([0, 0])
-    //     .center([0, 0])
-    //     .translate([width / 2, height / 2]);
-    //
+    // https://www.geeksforgeeks.org/d3-js-geomercator-function/
     const projection = d3version6.geoMercator()
         .scale(worldMapWidth / 2.5 / Math.PI)
         .rotate([0, 0])
         .center([0, 0])
         .translate([worldMapWidth / 2, worldMapHeight / 2]);
+        // TODO: remove, this was for the other data drawing file
         // .fitSize([worldMapWidth, worldMapHeight], mapData)
         // .precision(100);
     const pathGenerator = d3version6.geoPath().projection(projection);
@@ -28,7 +23,6 @@ const createWorldMap = (mapData) => {
     let zoom = d3version6.zoom()
         .scaleExtent([1, 10])
         .on("zoom", handleZoom)
-
 
     // This is my hacky way around the oceans not being paths.  Since they aren't defined (just empty space) zoom/pan won't
     // work when your mouse is pointed on the oceans.  This bounding box fixes that.
