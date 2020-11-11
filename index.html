@@ -105,7 +105,8 @@
         // Converted countries_without_geo.json to countries.geojson
         // original data (before conversion) - https://gist.github.com/jrrickard/8755532505a40f3b8317?short_path=c12ef4a
         // conversion tool - https://mygeodata.cloud/result
-        const worldMapPromise = d3version6.json('data/countries.geojson');
+        // https://raw.githubusercontent.com/janasayantan/datageojson/master/world.json - copied whole thing
+        const worldMapPromise = d3version6.json('data/countries_with_props.geojson');
 
     </script>
     <script src="javascript/world_map.js" type="application/javascript"></script>
