@@ -79,7 +79,7 @@ const createScatterPlot = () => {
             .attr('cy', plotht + margin.top - (dataHash[year][x][attr2] * yscale))
             .attr('r', '3')
             .attr('fill', 'black')
-            .attr('id', dataHash[year][x]['Country'])
+            .attr('id', dataHash[year][x]['Country'].toLowerCase().replaceAll(' ','-')
             .on("mouseover", function (event, d) {
                 console.log("mouseover");
                 div.transition()
