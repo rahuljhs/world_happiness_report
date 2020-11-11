@@ -1,6 +1,14 @@
 const worldMapHeight = 600;
 const worldMapWidth = 600;
 
+
+const determine_country_color = (data, color='white') => {
+    if (data['properties']['no_data'] === true) {
+        color = 'lightgrey'
+    }
+
+    return color;
+}
 // A lot of the map drawing was pull from https://medium.com/swlh/data-visualization-with-d3-world-map-aa03d68eb906
 const createWorldMap = (mapData) => {
     console.log(mapData);
@@ -43,11 +51,18 @@ const createWorldMap = (mapData) => {
         .data(mapData.features)
         .join('path')
         .attr('class', d => {
-            const name = d['properties']['name']
-            const classifiedName = name.toLowerCase().replaceAll(' ', '-')
-            return `country ${d['properties']['id']} ${classifiedName}`
+            const name = d['properties']['name'];
+            const classifiedName = name.toLowerCase().replaceAll(' ', '-');
+            let cssString = `country ${d['properties']['id']} ${classifiedName}`;
+            console.log(d['properties']['region'])
+            if (d['properties']['region']) {
+                const region = d['properties']['region'];
+                const classifiedRegion = region.toLowerCase().replaceAll(' ', '-');
+                cssString = `${cssString} region-${classifiedRegion}`
+            }
+            return cssString
         })
-        .attr('fill', 'white')
+        .attr('fill', d => determine_country_color(d))
         .style('pointer-events', 'all')
         .style("stroke-width", ".3")
         .style('stroke', 'black')
@@ -55,6 +70,12 @@ const createWorldMap = (mapData) => {
         .style('width', `${worldMapWidth}px`)
         .style('height', `${worldMapHeight}px`)
         .style('border', 'solid black')
+        .on('mouseenter', (d) =>
+            d3version6.select(d.target).style('fill', d => determine_country_color(d, 'purple'))
+        )
+        .on('mouseleave', (d) => d3version6.select(d.target).style('fill',
+                d => determine_country_color(d, 'white'))
+        )
 }
 
 worldMapPromise.then(data => {
