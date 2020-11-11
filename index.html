@@ -48,10 +48,42 @@
         </datalist>
 
         <label for="attribute1">Attribute 1:</label>
-        <input name="attribute1" id="attribute1" list="attribute_options" value="Happiness Score">
+        <select name="attribute1" id="attribute1">
+            <option value="Happiness Score" selected>Happiness Score</option>
+            <option value="Economy (GDP per Capita)">Economy (GDP per Capita)</option>
+            <option value="Family">Family</option>
+            <option value="Health (Life Expectancy)">Health (Life Expectancy)</option>
+            <option value="Freedom">Freedom</option>
+            <option value="Trust (Government Corruption)">Trust (Government Corruption)</option>
+            <option value="Generosity">Generosity</option>
+            <option value="Dystopia Residual">Dystopia Residual</option>
+        </select> 
 
         <label for="attribute2">Attribute 2:</label>
-        <input name="attribute2" id="attribute2" list="attribute_options" value="Freedom">
+        <select name="attribute2" id="attribute2">
+            <option value="Happiness Score" selected>Happiness Score</option>
+            <option value="Economy (GDP per Capita)">Economy (GDP per Capita)</option>
+            <option value="Family">Family</option>
+            <option value="Health (Life Expectancy)">Health (Life Expectancy)</option>
+            <option value="Freedom">Freedom</option>
+            <option value="Trust (Government Corruption)">Trust (Government Corruption)</option>
+            <option value="Generosity">Generosity</option>
+            <option value="Dystopia Residual">Dystopia Residual</option>
+        </select>
+
+        <label for="region">Region:</label>
+        <select name="region" id="region">
+            <option value="Western Europe" selected>Western Europe</option>
+            <option value="North America">North America</option>
+            <option value="Australia and New Zealand">Australia and New Zealand</option>
+            <option value="Middle East and Northern Africa">Middle East and Northern Africa</option>
+            <option value="Latin America and Caribbean">Latin America and Caribbean</option>
+            <option value="Southeastern Asia">Southeastern Asia</option>
+            <option value="Central and Eastern Europe">Central and Eastern Europe</option>
+            <option value="Eastern Asia">Eastern Asia</option>
+            <option value="Sub-Saharan Africa">Sub-Saharan Africa</option>
+            <option value="Southern Asia">Southern Asia</option>
+        </select>
 
     </div>
 
@@ -87,7 +119,8 @@
         // Converted countries_without_geo.json to countries.geojson
         // original data (before conversion) - https://gist.github.com/jrrickard/8755532505a40f3b8317?short_path=c12ef4a
         // conversion tool - https://mygeodata.cloud/result
-        const worldMapPromise = d3version6.json('data/countries.geojson');
+        // https://raw.githubusercontent.com/janasayantan/datageojson/master/world.json - copied whole thing
+        const worldMapPromise = d3version6.json('data/countries_with_props.geojson');
 
     </script>
     <script src="javascript/world_map.js" type="application/javascript"></script>
