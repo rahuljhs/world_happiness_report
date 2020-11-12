@@ -53,8 +53,34 @@ div.tooltip {
     pointer-events: none;
 }
 
+.scoreboard {
+    width: 400px;
+}
 
+.flex-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-width: 1px;
+    border-style: solid;
+    border-color: black;
+    text-align: center;
+}
+.data {
+    flex-direction: row;
+    width: 400px;
+    align-content: center;
+    text-align: center;
+}
+.cell {
+    width: 200px;
+    text-align: left;
+}
 
+#scoreboardTitle {
+    font-size: 20px;
+}
 
 .xAxis {
     font: 10px sans-serif;

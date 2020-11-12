@@ -1,12 +1,16 @@
 const scatterPlotHeight = 400;
 const scatterPlotWidth = 400;
+const color = ['#d73027', '#fc8d59', '#fee090', '#e0f3f8', '#91bfdb', '#4575b4'];
 
-var margin = { top: 20, bottom: 40, left: 50, right: 20 };
+var margin = { top: 40, bottom: 40, left: 50, right: 20 };
 
 var plotht = scatterPlotHeight - margin.top - margin.bottom;
 var plotwt = scatterPlotWidth - margin.left - margin.right;
 
 const splot = d3version6.select('#scatter-plot');
+
+const opacityOn = 1;
+const opacityOff = .5;
 
 
 // The color is just there to make sure code is working.  Feel Free to delete when working in this file!
@@ -62,11 +66,6 @@ const createScatterPlot = () => {
         }
     }
 
-    //define div for tooltip: example code used: https://bl.ocks.org/d3noob/a22c42db65eb00d4e369
-    var div = d3version6.select("body").append("div")
-        .attr("class", "tooltip")
-        .style("opacity", 0);
-
     //set whole number scales
     //figure out the scale of x & y axe
     var xscale = plotwt/Math.ceil(xmax);
@@ -78,21 +77,16 @@ const createScatterPlot = () => {
             .attr('cx', (dataHash[year][x][attr1]) * xscale + margin.left)
             .attr('cy', plotht + margin.top - (dataHash[year][x][attr2] * yscale))
             .attr('r', '3')
-            .attr('fill', 'black')
+            .attr('fill', color[0])
+            .attr('opacity', '0.5')
             .attr('id', dataHash[year][x]['Country'].toLowerCase().replaceAll(' ','-'))
             .on("mouseover", function (event, d) {
-                console.log("mouseover");
-                div.transition()
-                    .duration(200)
-                    .style("opacity", .9);
-                div.html("country")
-                    .style("left", "30px")
-                    .style("top", "20px");
+                temp = d3version6.select(this).attr('id');
+                updateOn(temp);
             })
             .on("mouseout", function (d) {
-                div.transition()
-                    .duration(500)
-                    .style("opacity", 0);
+                temp = d3version6.select(this).attr('id');
+                updateOff(temp);
             });
         //should add tooltip on this
     }
@@ -164,6 +158,7 @@ document.getElementById("attribute1").onchange = function () {
     d3version3.selectAll("#scatter-plot > *").remove(); 
     allFilesPromise.then(() => {
         createScatterPlot();
+        updateScoreboard();
     });
 }
 document.getElementById("attribute2").onchange = function () {
@@ -171,5 +166,6 @@ document.getElementById("attribute2").onchange = function () {
     d3version3.selectAll("#scatter-plot > *").remove(); 
     allFilesPromise.then(() => {
         createScatterPlot();
+        updateScoreboard();
     });
 }
