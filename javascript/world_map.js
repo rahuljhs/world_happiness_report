@@ -70,12 +70,16 @@ const createWorldMap = (mapData) => {
         .style('width', `${worldMapWidth}px`)
         .style('height', `${worldMapHeight}px`)
         .style('border', 'solid black')
-        .on('mouseenter', (d) =>
-            d3version6.select(d.target).style('fill', d => determine_country_color(d, 'purple'))
-        )
-        .on('mouseleave', (d) => d3version6.select(d.target).style('fill',
-                d => determine_country_color(d, 'white'))
-        )
+        .on('mouseenter', (d) => {
+            const target = d3version6.select(d.target);
+            target.style('fill', d => determine_country_color(d, 'purple'));
+            updateOn(target.attr('class').split(/[ ,]+/)[2]);
+        })
+        .on('mouseleave', (d) => {
+            const target = d3version6.select(d.target);
+            target.style('fill', d => determine_country_color(d, 'white'))
+            updateOff(target.attr('class').split(/[ ,]+/)[2]);
+        })
 }
 
 worldMapPromise.then(data => {

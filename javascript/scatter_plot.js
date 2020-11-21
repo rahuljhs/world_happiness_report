@@ -70,8 +70,8 @@ const createScatterPlot = () => {
     var yscale = plotht/Math.ceil(ymax);
 
     //plot the datapoints
-    for (x = 0; x < dataHash[year].length; x++) {
-        if (reg == "All") {
+    for (let x = 0; x < dataHash[year].length; x++) {
+        if (reg === "All") {
             splot.append('circle')
                 .attr('cx', (dataHash[year][x][attr1]) * xscale + margin.left)
                 .attr('cy', plotht + margin.top - (dataHash[year][x][attr2] * yscale))
@@ -89,7 +89,7 @@ const createScatterPlot = () => {
                 });
         }
         else {
-            if (dataHash[year][x]['Region'] == reg) {
+            if (dataHash[year][x]['Region'] === reg) {
                 splot.append('circle')
                     .attr('cx', (dataHash[year][x][attr1]) * xscale + margin.left)
                     .attr('cy', plotht + margin.top - (dataHash[year][x][attr2] * yscale))

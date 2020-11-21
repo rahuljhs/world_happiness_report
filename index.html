@@ -36,16 +36,16 @@
             <option value="2019">2019</option>
         </select>
 
-        <datalist id="attribute_options">
-            <option value="Happiness Score" selected>Happiness Score</option>
-            <option value="Economy (GDP per Capita)">Economy (GDP per Capita)</option>
-            <option value="Family">Family</option>
-            <option value="Health (Life Expectancy)">Health (Life Expectancy)</option>
-            <option value="Freedom">Freedom</option>
-            <option value="Trust (Government Corruption)">Trust (Government Corruption)</option>
-            <option value="Generosity">Generosity</option>
-            <option value="Dystopia Residual">Dystopia Residual</option>
-        </datalist>
+<!--        <datalist id="attribute_options">-->
+<!--            <option value="Happiness Score" selected>Happiness Score</option>-->
+<!--            <option value="Economy (GDP per Capita)">Economy (GDP per Capita)</option>-->
+<!--            <option value="Family">Family</option>-->
+<!--            <option value="Health (Life Expectancy)">Health (Life Expectancy)</option>-->
+<!--            <option value="Freedom">Freedom</option>-->
+<!--            <option value="Trust (Government Corruption)">Trust (Government Corruption)</option>-->
+<!--            <option value="Generosity">Generosity</option>-->
+<!--            <option value="Dystopia Residual">Dystopia Residual</option>-->
+<!--        </datalist>-->
 
         <label for="attribute1">Attribute 1:</label>
         <select name="attribute1" id="attribute1">
@@ -90,25 +90,34 @@
     </div>
 
     <div class="viz-container">
-        <svg id="world-map" height="600px" width="600px"></svg>
-        <div class="flex-container scoreboard">
-            <div class="flex-container" id="scoreboardTitle">CountryName</div>
-            <div class="flex-container data">
-                <div class="flex-container cell" id="SBhappinessScore">Happiness Score:</div>
-                <div class="flex-container cell" id="SBattr1">Attr1: </div>
-            </div>
-            <div class="flex-container data">
-                <div class="flex-container cell" id="SBhappinessRank">Happiness Rank:</div>
-                <div class="flex-container cell" id="SBattr2">Attr2: </div>
+<!--            This is the first row in the viz-->
+        <div class="viz-item">
+            <svg id="world-map" class="viz-item" height="600px" width="600px"></svg>
+            <div class="viz-item" style="flex-direction: column;">
+                <div class="flex-container scoreboard">
+                    <div class="flex-container" id="scoreboardTitle">CountryName</div>
+                    <div class="flex-container data">
+                        <div class="flex-container cell" id="sb-happiness-score">Happiness Score:</div>
+                        <div class="flex-container cell" id="sb-attr-1">Attr1: </div>
+                    </div>
+                    <div class="flex-container data">
+                        <div class="flex-container cell" id="sb-happiness-rank">Happiness Rank:</div>
+                        <div class="flex-container cell" id="sb-attr-2">Attr2: </div>
+                    </div>
+                </div>
+                <svg id="scatter-plot"></svg>
             </div>
         </div>
-        <svg id="line-chart"></svg>
-        <svg id="scatter-plot"></svg>
+<!--            this is the second row in the viz-->
+        <div class="viz-item" style="flex-shrink: 0">
+            <svg id="line-chart"></svg>
+        </div>
     </div>
 
 
-
-    <script>const files = [];
+    <script src="javascript/update.js" type="application/javascript"></script>
+    <script>
+        const files = [];
         files.push(d3version6.csv("data/2015.csv"));
         files.push(d3version6.csv("data/2016.csv"));
         files.push(d3version6.csv("data/2017.csv"));
@@ -123,19 +132,18 @@
             data.forEach((dataFileContents, index) => {
                 dataHash[`201${index + 5}`] = dataFileContents;
             })
-
-            // TODO: remove this console.log()
-            console.log(dataHash);
         });
+        // Updating the scoreboard on load since there is a default attribute selected
+        updateScoreboard();
 
         // Converted countries_without_geo.json to countries.geojson
         // original data (before conversion) - https://gist.github.com/jrrickard/8755532505a40f3b8317?short_path=c12ef4a
         // conversion tool - https://mygeodata.cloud/result
         // https://raw.githubusercontent.com/janasayantan/datageojson/master/world.json - copied whole thing
-        const worldMapPromise = d3version6.json('data/countries_with_props.geojson');</script>
+        const worldMapPromise = d3version6.json('data/countries_with_props.geojson');
+    </script>
     <script src="javascript/world_map.js" type="application/javascript"></script>
     <script src="javascript/line_chart.js" type="application/javascript"></script>
     <script src="javascript/scatter_plot.js" type="application/javascript"></script>
-    <script src="javascript/update.js" type="application/javascript"></script>
 </body>
 </html>
