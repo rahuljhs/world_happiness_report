@@ -1,18 +1,30 @@
 const worldMapHeight = 600;
 const worldMapWidth = 600;
 
+const noDataCountryColor = 'lightgrey';
+const disabledCountryColor = '#808080';
+const enabledCountryColor = 'white';
 
 const determine_country_color = (data, color='white') => {
     if (data['properties']['no_data'] === true) {
-        color = 'lightgrey'
+        color = noDataCountryColor;
     }
 
     return color;
 }
+const addClassesToMap = (d) => {
+    const name = d['properties']['name'];
+    const classifiedName = name.toLowerCase().replaceAll(' ', '-');
+    let cssString = `country ${d['properties']['id']} ${classifiedName}`;
+    if (d['properties']['region']) {
+        const region = d['properties']['region'];
+        const classifiedRegion = region.toLowerCase().replaceAll(' ', '-');
+        cssString = `${cssString} region-${classifiedRegion}`
+    }
+    return cssString
+}
 // A lot of the map drawing was pull from https://medium.com/swlh/data-visualization-with-d3-world-map-aa03d68eb906
 const createWorldMap = (mapData) => {
-    console.log(mapData);
-
     // https://www.geeksforgeeks.org/d3-js-geomercator-function/
     const projection = d3version6.geoMercator()
         .scale(worldMapWidth / 2.5 / Math.PI)
@@ -50,18 +62,8 @@ const createWorldMap = (mapData) => {
         .selectAll('.country')
         .data(mapData.features)
         .join('path')
-        .attr('class', d => {
-            const name = d['properties']['name'];
-            const classifiedName = name.toLowerCase().replaceAll(' ', '-');
-            let cssString = `country ${d['properties']['id']} ${classifiedName}`;
-            console.log(d['properties']['region'])
-            if (d['properties']['region']) {
-                const region = d['properties']['region'];
-                const classifiedRegion = region.toLowerCase().replaceAll(' ', '-');
-                cssString = `${cssString} region-${classifiedRegion}`
-            }
-            return cssString
-        })
+        // All regions start as enabled
+        .attr('class', d => `${addClassesToMap(d)} region-enabled`)
         .attr('fill', d => determine_country_color(d))
         .style('pointer-events', 'all')
         .style("stroke-width", ".3")
@@ -72,15 +74,44 @@ const createWorldMap = (mapData) => {
         .style('border', 'solid black')
         .on('mouseenter', (d) => {
             const target = d3version6.select(d.target);
-            target.style('fill', d => determine_country_color(d, 'purple'));
-            updateOn(target.attr('class').split(/[ ,]+/)[2]);
+            if (target.attr('class').includes('region-enabled')) {
+                target.style('fill', d => determine_country_color(d, 'purple'));
+                updateOn(target.attr('class').split(/[ ,]+/)[2]);
+            }
         })
         .on('mouseleave', (d) => {
             const target = d3version6.select(d.target);
-            target.style('fill', d => determine_country_color(d, 'white'))
-            updateOff(target.attr('class').split(/[ ,]+/)[2]);
+            if (target.attr('class').includes('region-enabled')) {
+                target.style('fill', d => determine_country_color(d, 'white'))
+                updateOff(target.attr('class').split(/[ ,]+/)[2]);
+            }
         })
 }
+
+const filterCountryRegion = (newRegion) => {
+    d3version6.selectAll('#world-map .country')
+        .style('fill', d => {
+            const region = d['properties']['region'];
+            if (region && newRegion === 'All') {
+                return enabledCountryColor;
+            }
+            if (region && region === newRegion) {
+                return enabledCountryColor;
+            } else if (region) {
+                return disabledCountryColor;
+            }
+        })
+        .attr('class', d => {
+            const region = d['properties']['region'];
+            let cssString = addClassesToMap(d);
+            if (region) {
+                if (region === newRegion) {
+                    cssString = `${cssString} region-enabled`
+                }
+            }
+            return `${cssString} `;
+        })
+};
 
 worldMapPromise.then(data => {
     createWorldMap(data);

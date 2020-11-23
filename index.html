@@ -36,17 +36,6 @@
             <option value="2019">2019</option>
         </select>
 
-<!--        <datalist id="attribute_options">-->
-<!--            <option value="Happiness Score" selected>Happiness Score</option>-->
-<!--            <option value="Economy (GDP per Capita)">Economy (GDP per Capita)</option>-->
-<!--            <option value="Family">Family</option>-->
-<!--            <option value="Health (Life Expectancy)">Health (Life Expectancy)</option>-->
-<!--            <option value="Freedom">Freedom</option>-->
-<!--            <option value="Trust (Government Corruption)">Trust (Government Corruption)</option>-->
-<!--            <option value="Generosity">Generosity</option>-->
-<!--            <option value="Dystopia Residual">Dystopia Residual</option>-->
-<!--        </datalist>-->
-
         <label for="attribute1">Attribute 1:</label>
         <select name="attribute1" id="attribute1">
             <option value="Happiness Score" selected>Happiness Score</option>
@@ -73,8 +62,7 @@
 
         <label for="region">Region:</label>
         <select name="region" id="region">
-
-            <option value="All" selected>All</option>
+            <option value="All" selected >All</option>
             <option value="Western Europe">Western Europe</option>
             <option value="North America">North America</option>
             <option value="Australia and New Zealand">Australia and New Zealand</option>
@@ -124,6 +112,12 @@
         files.push(d3version6.csv("data/2018.csv"));
         files.push(d3version6.csv("data/2019.csv"));
 
+        // Reset filters
+        d3version6.selectAll("#attribute1 option").property("selected", d => d === 'Happiness Score')
+        d3version6.selectAll("#attribute2 option").property("selected", d => d === 'Happiness Score')
+        d3version6.selectAll("#region option").property("selected", d => d === 'All')
+        d3version6.selectAll("#year option").property("selected", d => d === '2015')
+
         // dataHash contains all of the csv data and is keyed by a string the represents the year
         const dataHash = {};
 
@@ -145,5 +139,6 @@
     <script src="javascript/world_map.js" type="application/javascript"></script>
     <script src="javascript/line_chart.js" type="application/javascript"></script>
     <script src="javascript/scatter_plot.js" type="application/javascript"></script>
+    <script src="javascript/filter.js" type="application/javascript"></script>
 </body>
 </html>
