@@ -1,4 +1,5 @@
-﻿const updateOn = (countryId) => {
+﻿const map = d3version6.select('#world-map');
+const updateOn = (countryId) => {
     var year = document.getElementById("year").value; //this will need to be updated by the filter input: Year
     var attr1 = document.getElementById("attribute1").value; //this will need to be updated by the filter input: Attribute 1
     var attr2 = document.getElementById("attribute2").value; //this will need to be updated by the filter input: Attribute 2
@@ -20,6 +21,8 @@
     splot.select(`#${countryId}`)
         .attr("opacity", opacityOn)
         .attr('r', '5');
+   
+    map.select(`.${countryId}`).style('fill', d => determine_country_color(d, 'purple'));
 }
 
 const updateOff = (countryId) => {
@@ -39,6 +42,7 @@ const updateOff = (countryId) => {
         .text(`${attr1}:`);
     d3version6.select('#sb-attr-2')
         .text(`${attr2}:`);
+    map.select(`.${countryId}`).style('fill', d => determine_country_color(d, 'white'))
 }
 
 const updateScoreboard = () => {
