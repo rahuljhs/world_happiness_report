@@ -21,6 +21,8 @@ const updateOn = (countryId) => {
     splot.select(`#${countryId}`)
         .attr("opacity", opacityOn)
         .attr('r', '5');
+    bplot.select(`#${countryId}`)
+        .attr('opacity','1')
    
     map.select(`.${countryId}`).style('fill', d => determine_country_color(d, 'purple'));
 }
@@ -32,6 +34,8 @@ const updateOff = (countryId) => {
     splot.select(`#${countryId}`)
         .attr("opacity", opacityOff)
         .attr('r', '3');
+    bplot.select(`#${countryId}`)
+        .attr('opacity','0.5')
     d3version6.select('#scoreboardTitle')
         .text('Select a Country');
     d3version6.select('#sb-happiness-rank')
