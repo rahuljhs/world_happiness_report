@@ -45,11 +45,11 @@ const createScatterPlot = () => {
         .style('stroke-width', '1');
 
     //get min & max of x & y values
-    var xmin = 100; //attr 1
-    var xmax = 0; //attr 1
-    var ymin = 100; //attr 2
-    var ymax = 0; //attr 2
-    for (x = 0; x < dataHash[year].length; x++) {
+    let xmin = 100; //attr 1
+    let xmax = 0; //attr 1
+    let ymin = 100; //attr 2
+    let ymax = 0; //attr 2
+    for (let x = 0; x < dataHash[year].length; x++) {
         if (dataHash[year][x][attr1] > xmax) {
             xmax = dataHash[year][x][attr1];
         }
@@ -70,8 +70,8 @@ const createScatterPlot = () => {
     var yscale = plotht/Math.ceil(ymax);
 
     //plot the datapoints
-    for (x = 0; x < dataHash[year].length; x++) {
-        if (reg == "All") {
+    for (let x = 0; x < dataHash[year].length; x++) {
+        if (reg === "All") {
             splot.append('circle')
                 .attr('cx', (dataHash[year][x][attr1]) * xscale + margin.left)
                 .attr('cy', plotht + margin.top - (dataHash[year][x][attr2] * yscale))
@@ -89,7 +89,7 @@ const createScatterPlot = () => {
                 });
         }
         else {
-            if (dataHash[year][x]['Region'] == reg) {
+            if (dataHash[year][x]['Region'] === reg) {
                 splot.append('circle')
                     .attr('cx', (dataHash[year][x][attr1]) * xscale + margin.left)
                     .attr('cy', plotht + margin.top - (dataHash[year][x][attr2] * yscale))
@@ -163,33 +163,3 @@ const createScatterPlot = () => {
 allFilesPromise.then(() => {
     createScatterPlot();
 });
-
-document.getElementById("year").onchange = function () {
-    //console.log("year update");
-    d3version3.selectAll("#scatter-plot > *").remove(); 
-    allFilesPromise.then(() => {
-        createScatterPlot();
-    });
-}
-document.getElementById("attribute1").onchange = function () {
-    //console.log("attr1 update");
-    d3version3.selectAll("#scatter-plot > *").remove(); 
-    allFilesPromise.then(() => {
-        createScatterPlot();
-        updateScoreboard();
-    });
-}
-document.getElementById("attribute2").onchange = function () {
-    d3version3.selectAll("#scatter-plot > *").remove(); 
-    allFilesPromise.then(() => {
-        createScatterPlot();
-        updateScoreboard();
-    });
-}
-document.getElementById("region").onchange = function () {
-    d3version3.selectAll("#scatter-plot > *").remove();
-    allFilesPromise.then(() => {
-        createScatterPlot();
-        updateScoreboard();
-    });
-}
