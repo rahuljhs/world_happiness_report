@@ -7,7 +7,7 @@ var margin = { top: 40, bottom: 40, left: 50, right: 20 };
 var plotht = scatterPlotHeight - margin.top - margin.bottom;
 var plotwt = scatterPlotWidth - margin.left - margin.right;
 
-const splot = d3version6.select('#scatter-plot');
+    const splot = d3version6.select('#scatter-plot');
 
 const opacityOn = 1;
 const opacityOff = .5;

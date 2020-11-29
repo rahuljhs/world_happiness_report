@@ -142,7 +142,7 @@ const createBarPlot = () => {
             //.attr('fill', color[0])
             .attr("fill", "#69b3a2")
             .attr('opacity', '0.5')
-            .attr('id', dataHash[year][x]['Country'].toLowerCase().replaceAll(' ', '-'))
+            .attr('id', `bp-${dataHash[year][x]['Country'].toLowerCase().replaceAll(' ', '-')}`)
             .on("mouseover", function (event, d) {
                 temp = d3version6.select(this).attr('id')
                 //console.log(temp);
