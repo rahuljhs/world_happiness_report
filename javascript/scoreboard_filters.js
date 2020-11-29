@@ -17,11 +17,10 @@ const updateOn = (countryId) => {
                 .text(`${attr2}: ${dataHash[year][x][attr2]}`);
         }
     }
-
     splot.select(`#${countryId}`)
         .attr("opacity", opacityOn)
         .attr('r', '5');
-    bplot.select(`#bp-${countryId}`)
+    bplot.select(`#${countryId}`)
         .attr('opacity','1')
    
     map.select(`.${countryId}`).style('fill', d => determine_country_color(d, 'purple'));
@@ -33,7 +32,7 @@ const updateOff = (countryId) => {
     splot.select(`#${countryId}`)
         .attr("opacity", opacityOff)
         .attr('r', '3');
-    bplot.select(`#bp-${countryId}`)
+    bplot.select(`#${countryId}`)
         .attr('opacity','0.5')
     d3version6.select('#scoreboardTitle')
         .text('Select a Country');

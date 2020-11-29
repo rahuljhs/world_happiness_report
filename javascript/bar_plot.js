@@ -1,18 +1,18 @@
 const barPlotHeight = 500;
 const barPlotWidth = 1000;
-var selectSize=30;
-var xIndex=0;
-var drag=d3version3.behavior.drag();
+let selectSize=30;
+let xIndex=0;
+let drag=d3version3.behavior.drag();
 
-var barMargin = { top: 20, bottom: 240, left: 80, right: 20 };
+let barMargin = { top: 20, bottom: 240, left: 80, right: 20 };
 
-var bplotht = barPlotHeight - barMargin.top - barMargin.bottom;
-var bplotwt = barPlotWidth - barMargin.left - barMargin.right;
+let bplotht = barPlotHeight - barMargin.top - barMargin.bottom;
+let bplotwt = barPlotWidth - barMargin.left - barMargin.right;
 
 const bplot = d3version6.select('#bar-plot');
 
-var countryAttr = 'Country';
-var countryArray=[];
+let countryAttr = 'Country';
+let countryArray=[];
 
 
 // function move(d) {
@@ -117,7 +117,7 @@ const createBarPlot = () => {
     var xmin = 10; //attr 1
     var xmax = 0; //attr 1
 
-    for (x = xIndex; x < selectSize+xIndex; x++) {
+    for (let x = 0; x < selectSize+xIndex; x++) {
     	countryArray.push(dataHash[year][x][countryAttr])
 
         if (dataHash[year][x][attr1] > xmax) {
@@ -133,7 +133,7 @@ const createBarPlot = () => {
 
 
     //plot the datapoints
-    for (x = xIndex; x < selectSize+xIndex; x++) {
+    for (let x = xIndex; x < selectSize+xIndex; x++) {
         bplot.append('rect')
             .attr('x', barMargin.left+1+(x-xIndex)*xbarscale)
             .attr('y', barPlotHeight-barMargin.bottom-dataHash[year][x][attr1]*ybarscale-1)
@@ -145,22 +145,15 @@ const createBarPlot = () => {
             .attr('id', `bp-${dataHash[year][x]['Country'].toLowerCase().replaceAll(' ', '-')}`)
             .on("mouseover", function (event, d) {
                 let temp = d3version6.select(this).attr('id')
-                //console.log(temp);
                 updateOn(temp);
             })
             .on("mouseout", function (d) {
-                let temp = d3version6.select(this).attr('id')
-                //console.log(temp);
+                let temp = d3version6.select(d.target).attr('id')
                 updateOff(temp);
             });
-            // bplot.append('text')
-            //     .attr('x', barMargin.left+5+(x-xIndex)*xbarscale)
-            //     .attr('y', barPlotHeight-barMargin.bottom-dataHash[year][x][attr1]*ybarscale-8)
-            //     .text(dataHash[year][x][attr1])
-            //     .style('font-size','8px');
         }
 
-    for (i = 0; i < dataHash[year].length; i++) {
+    for (let i = 0; i < dataHash[year].length; i++) {
         bplot.append('rect')
             .attr('x', barMargin.left+(i*bplotwt/dataHash[year].length))
             .attr('y', barPlotHeight-70-dataHash[year][i][attr1]*ybarscale*.3)
@@ -169,10 +162,10 @@ const createBarPlot = () => {
             .attr("fill", "gray");
         }
 
-    var yAxisScale = d3version3.scale.linear()
+    let yAxisScale = d3version3.scale.linear()
         .domain([0, Math.ceil(xmax)])
         .range([bplotht + barMargin.top, barMargin.top]);
-    var yAxis = d3version3.svg.axis()
+    let yAxis = d3version3.svg.axis()
         .scale(yAxisScale)
         .orient("left");
     bplot.append('g')
@@ -180,10 +173,10 @@ const createBarPlot = () => {
         .attr('transform', 'translate(' + (barMargin.left) + ",0)")
         .call(yAxis);
 
-    var xAxisScale = d3version6.scaleBand()
+    let xAxisScale = d3version6.scaleBand()
         .domain(countryArray)
         .range([barMargin.left-1, barPlotWidth-barMargin.right]);
-    var xAxis = d3version3.svg.axis()
+    let xAxis = d3version3.svg.axis()
         .scale(xAxisScale)
         .orient("bottom")
         .ticks(selectSize);
