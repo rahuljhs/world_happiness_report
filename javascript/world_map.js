@@ -71,7 +71,7 @@ const createWorldMap = (mapData) => {
         .attr('d', feature => pathGenerator(feature))
         .style('width', `${worldMapWidth}px`)
         .style('height', `${worldMapHeight}px`)
-        .style('border', 'solid black')
+        .style('border', 'solid')
         .on('mouseenter', (d) => {
             const target = d3version6.select(d.target);
             if (target.attr('class').includes('region-enabled')) {
@@ -84,6 +84,13 @@ const createWorldMap = (mapData) => {
             if (target.attr('class').includes('region-enabled')) {
                 target.style('fill', d => determine_country_color(d, 'white'))
                 updateOff(target.attr('class').split(/[ ,]+/)[2]);
+            }
+        })
+        .on('click', (d) => {
+            const target = d3version6.select(d.target);
+            const targetClass = target.attr('class');
+            if (targetClass.includes('region-enabled')) {
+                filterCountries(target);
             }
         })
 }
