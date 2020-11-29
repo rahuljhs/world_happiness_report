@@ -145,11 +145,11 @@ const createBarPlot = () => {
             .attr('id', `bp-${dataHash[year][x]['Country'].toLowerCase().replaceAll(' ', '-')}`)
             .on("mouseover", function (event, d) {
                 let temp = d3version6.select(this).attr('id')
-                updateOn(temp);
+                updateOn(temp.substring(3, temp.length));
             })
             .on("mouseout", function (d) {
                 let temp = d3version6.select(d.target).attr('id')
-                updateOff(temp);
+                updateOff(temp.substring(3, temp.length));
             });
         }
 
