@@ -85,6 +85,26 @@ const createWorldMap = (mapData) => {
                 target.style('fill', d => determine_country_color(d, 'white'))
                 updateOff(target.attr('class').split(/[ ,]+/)[2]);
             }
+            console.log('leaving country');
+        })
+        .on('click', d => {
+            const target = d3version6.select(d.target);
+            const targetClass = target.attr('class');
+            if (targetClass.includes('region-enabled')) {
+                if (targetClass.includes('selected')) {
+                    const classList = targetClass.split(/[ ,]+/)
+                    const newClass = classList.splice(classList.indexOf("selected"), 1).join(' ');
+                    target.attr('class', newClass);
+                    target.style('stroke', 'black')
+                    target.style('stroke-width', '.3')
+                } else {
+                    target.attr('class', `${targetClass} selected`);
+                    target.style('stroke', 'yellow')
+                    target.style('stroke-width', '1.5')
+                }
+                // updateOff(target.attr('class').split(/[ ,]+/)[2]);
+                console.log('clicking country');
+            }
         })
 }
 
