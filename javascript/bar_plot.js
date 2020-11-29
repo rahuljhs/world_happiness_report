@@ -144,12 +144,12 @@ const createBarPlot = () => {
             .attr('opacity', '0.5')
             .attr('id', `bp-${dataHash[year][x]['Country'].toLowerCase().replaceAll(' ', '-')}`)
             .on("mouseover", function (event, d) {
-                temp = d3version6.select(this).attr('id')
+                let temp = d3version6.select(this).attr('id')
                 //console.log(temp);
                 updateOn(temp);
             })
             .on("mouseout", function (d) {
-                temp = d3version6.select(this).attr('id')
+                let temp = d3version6.select(this).attr('id')
                 //console.log(temp);
                 updateOff(temp);
             });
