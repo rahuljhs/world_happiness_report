@@ -15,10 +15,10 @@ const opacityOff = .5;
 
 // The color is just there to make sure code is working.  Feel Free to delete when working in this file!
 const createScatterPlot = () => {
-    var year = document.getElementById("year").value; //this will need to be updated by the filter input: Year
-    var attr1 = document.getElementById("attribute1").value; //this will need to be updated by the filter input: Attribute 1
-    var attr2 = document.getElementById("attribute2").value; //this will need to be updated by the filter input: Attribute 2
-    var reg = document.getElementById("region").value; 
+    let year = document.getElementById("year").value; //this will need to be updated by the filter input: Year
+    let attr1 = document.getElementById("attribute1").value; //this will need to be updated by the filter input: Attribute 1
+    let attr2 = document.getElementById("attribute2").value; //this will need to be updated by the filter input: Attribute 2
+    let reg = document.getElementById("region").value;
 
     d3version6.select('#scatter-plot')
         .style('width', `${scatterPlotWidth}px`)
@@ -90,21 +90,26 @@ const createScatterPlot = () => {
         }
         else {
             if (dataHash[year][x]['Region'] === reg) {
-                splot.append('circle')
-                    .attr('cx', (dataHash[year][x][attr1]) * xscale + margin.left)
-                    .attr('cy', plotht + margin.top - (dataHash[year][x][attr2] * yscale))
-                    .attr('r', '3')
-                    .attr('fill', color[0])
-                    .attr('opacity', '0.5')
-                    .attr('id', dataHash[year][x]['Country'].toLowerCase().replaceAll(' ', '-'))
-                    .on("mouseover", function (event, d) {
-                        temp = d3version6.select(this).attr('id');
-                        updateOn(temp);
-                    })
-                    .on("mouseout", function (d) {
-                        temp = d3version6.select(this).attr('id');
-                        updateOff(temp);
-                    });
+                if (selectedCountryHash[dataHash[year][x]['Country'].toLowerCase().replaceAll(' ', '-')]) {
+                    // console.log(selectedCountryHash[dataHash[year][x]['Country'].toLowerCase().replaceAll(' ', '-')]);
+                    // console.log(dataHash[year][x]['Country'].toLowerCase().replaceAll(' ', '-'));
+                    // console.log(selectedCountryHash);
+                    splot.append('circle')
+                        .attr('cx', (dataHash[year][x][attr1]) * xscale + margin.left)
+                        .attr('cy', plotht + margin.top - (dataHash[year][x][attr2] * yscale))
+                        .attr('r', '3')
+                        .attr('fill', color[0])
+                        .attr('opacity', '0.5')
+                        .attr('id', dataHash[year][x]['Country'].toLowerCase().replaceAll(' ', '-'))
+                        .on("mouseover", function (event, d) {
+                            temp = d3version6.select(this).attr('id');
+                            updateOn(temp);
+                        })
+                        .on("mouseout", function (d) {
+                            temp = d3version6.select(this).attr('id');
+                            updateOff(temp);
+                        });
+                }
             }
         }
     }

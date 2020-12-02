@@ -106,6 +106,8 @@
     <script src="javascript/scoreboard_filters.js" type="application/javascript"></script>
     <script>
         const files = [];
+        const selectedCountryHash = {};
+        const regionCountryHash = {};
         files.push(d3version6.csv("data/2015.csv"));
         files.push(d3version6.csv("data/2016.csv"));
         files.push(d3version6.csv("data/2017.csv"));
@@ -126,6 +128,17 @@
             data.forEach((dataFileContents, index) => {
                 dataHash[`201${index + 5}`] = dataFileContents;
             })
+            dataHash['2015'].forEach( countryData => {
+                let country = countryData['Country'].toLowerCase().replaceAll(' ', '-')
+                selectedCountryHash[country] = false;
+                let region = countryData['Region'].toLowerCase().replaceAll(' ', '-')
+                if (!regionCountryHash[region]) {
+                    regionCountryHash[region] = [country]
+                } else {
+                    // assuming no duplicate countries
+                    regionCountryHash[region].push(country)
+                }
+            });
         });
         // Updating the scoreboard on load since there is a default attribute selected
         updateScoreboard();

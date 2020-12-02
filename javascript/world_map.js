@@ -20,6 +20,8 @@ const addClassesToMap = (d) => {
         const region = d['properties']['region'];
         const classifiedRegion = region.toLowerCase().replaceAll(' ', '-');
         cssString = `${cssString} region-${classifiedRegion}`
+    } else {
+        cssString = `${cssString} region-disabled`
     }
     return cssString
 }
@@ -63,7 +65,7 @@ const createWorldMap = (mapData) => {
         .data(mapData.features)
         .join('path')
         // All regions start as enabled
-        .attr('class', d => `${addClassesToMap(d)} region-enabled`)
+        .attr('class', d => `${addClassesToMap(d)}`)
         .attr('fill', d => determine_country_color(d))
         .style('pointer-events', 'all')
         .style("stroke-width", ".3")
@@ -93,10 +95,33 @@ const createWorldMap = (mapData) => {
                 filterCountries(target);
             }
         })
+    filterCountryRegion('All');
 }
 
 const filterCountryRegion = (newRegion) => {
     d3version6.selectAll('#world-map .country')
+        .attr('class', d => {
+            const region = d['properties']['region'];
+            let cssString = addClassesToMap(d);
+            if (region) {
+                if (newRegion === 'All') {
+                    if (!cssString.includes('region-enabled')) {
+                        cssString = `${cssString} region-enabled selected`
+                    }
+                } else if (region === newRegion) {
+                    cssString = `${cssString} region-enabled selected`
+
+                } else {
+                    let classList = cssString.split();
+                    if (!classList.indexOf("region-enabled") === -1) {
+                        classList.splice(classList.indexOf("region-enabled"), 1);
+                    }
+
+                    cssString = classList.join(' ');
+                }
+            }
+            return `${cssString} `;
+        })
         .style('fill', d => {
             const region = d['properties']['region'];
             if (region && newRegion === 'All') {
@@ -108,16 +133,7 @@ const filterCountryRegion = (newRegion) => {
                 return disabledCountryColor;
             }
         })
-        .attr('class', d => {
-            const region = d['properties']['region'];
-            let cssString = addClassesToMap(d);
-            if (region) {
-                if (region === newRegion) {
-                    cssString = `${cssString} region-enabled`
-                }
-            }
-            return `${cssString} `;
-        })
+
 };
 
 worldMapPromise.then(data => {
