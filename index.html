@@ -130,7 +130,7 @@
             })
             dataHash['2015'].forEach( countryData => {
                 let country = countryData['Country'].toLowerCase().replaceAll(' ', '-')
-                selectedCountryHash[country] = false;
+                selectedCountryHash[country] = true;
                 let region = countryData['Region'].toLowerCase().replaceAll(' ', '-')
                 if (!regionCountryHash[region]) {
                     regionCountryHash[region] = [country]

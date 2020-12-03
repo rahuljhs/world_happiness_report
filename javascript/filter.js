@@ -26,14 +26,11 @@ document.getElementById("region").onchange = function (changeEvent) {
         Object.keys(selectedCountryHash).forEach(selectedCountry => {
             selectedCountryHash[selectedCountry] = true;
         });
-        console.log('hi')
         applySelectedStyles(d3version6.selectAll('#world-map .country.region-enabled'));
-        console.log('bye')
     } else {
         regionCountryHash[region].forEach(country => {
             selectedCountryHash[country] = true;
             applySelectedStyles(d3version6.selectAll(`#world-map .${country}`));
-            console.log(country);
         });
 
         // keys will get all of the countries

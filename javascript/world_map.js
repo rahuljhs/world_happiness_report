@@ -74,6 +74,10 @@ const createWorldMap = (mapData) => {
         .style('width', `${worldMapWidth}px`)
         .style('height', `${worldMapHeight}px`)
         .style('border', 'solid')
+        // Things are selected by default
+        .style('stroke', d => d['properties']['region'] ? 'yellow' : 'black')
+        .style('stroke-width', d => d['properties']['region'] ? '1.5' : '0.3')
+
         .on('mouseenter', (d) => {
             const target = d3version6.select(d.target);
             if (target.attr('class').includes('region-enabled')) {
@@ -133,6 +137,22 @@ const filterCountryRegion = (newRegion) => {
                 return disabledCountryColor;
             }
         })
+        .style('stroke', d => {
+            let target = d3version6.select(`#world-map .${d['properties']['name'].toLowerCase().replaceAll(' ', '-')}`)
+            if (target.classed('selected')) {
+                return 'yellow';
+            }
+            return 'black';
+        })
+        .style('stroke-width', d => {
+            let target = d3version6.select(`#world-map .${d['properties']['name'].toLowerCase().replaceAll(' ', '-')}`)
+            if (target.classed('selected')) {
+                return '1.5';
+            }
+            return '0.3';
+        })
+
+
 
 };
 

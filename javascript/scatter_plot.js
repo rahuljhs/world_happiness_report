@@ -78,6 +78,7 @@ const createScatterPlot = () => {
                 .attr('r', '3')
                 .attr('fill', color[0])
                 .attr('opacity', '0.5')
+                .attr('class', 'selected')
                 .attr('id', dataHash[year][x]['Country'].toLowerCase().replaceAll(' ', '-'))
                 .on("mouseover", function (event, d) {
                     temp = d3version6.select(this).attr('id');
@@ -91,22 +92,20 @@ const createScatterPlot = () => {
         else {
             if (dataHash[year][x]['Region'] === reg) {
                 if (selectedCountryHash[dataHash[year][x]['Country'].toLowerCase().replaceAll(' ', '-')]) {
-                    // console.log(selectedCountryHash[dataHash[year][x]['Country'].toLowerCase().replaceAll(' ', '-')]);
-                    // console.log(dataHash[year][x]['Country'].toLowerCase().replaceAll(' ', '-'));
-                    // console.log(selectedCountryHash);
                     splot.append('circle')
                         .attr('cx', (dataHash[year][x][attr1]) * xscale + margin.left)
                         .attr('cy', plotht + margin.top - (dataHash[year][x][attr2] * yscale))
                         .attr('r', '3')
                         .attr('fill', color[0])
                         .attr('opacity', '0.5')
+                        .attr('class', 'selected')
                         .attr('id', dataHash[year][x]['Country'].toLowerCase().replaceAll(' ', '-'))
                         .on("mouseover", function (event, d) {
-                            temp = d3version6.select(this).attr('id');
+                            let temp = d3version6.select(this).attr('id');
                             updateOn(temp);
                         })
                         .on("mouseout", function (d) {
-                            temp = d3version6.select(this).attr('id');
+                            let temp = d3version6.select(this).attr('id');
                             updateOff(temp);
                         });
                 }
@@ -160,9 +159,6 @@ const createScatterPlot = () => {
         .attr('class', 'axis')
         .attr('transform', 'translate(' + (margin.left) + ",0)")
         .call(yAxis);
-
-    //console.log("Axis: " + d3version3.select(".axis path").style("stroke-width"))
-
 }
 
 allFilesPromise.then(() => {
