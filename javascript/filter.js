@@ -21,6 +21,27 @@ document.getElementById("attribute2").onchange = function () {
 document.getElementById("region").onchange = function (changeEvent) {
     const newRegion = changeEvent.target.value;
     d3version3.selectAll("#scatter-plot > *").remove();
+    let region = newRegion.toLowerCase().replaceAll(' ', '-');
+    if (newRegion === 'All') {
+        Object.keys(selectedCountryHash).forEach(selectedCountry => {
+            selectedCountryHash[selectedCountry] = true;
+        });
+        applySelectedStyles(d3version6.selectAll('#world-map .country.region-enabled'));
+    } else {
+        regionCountryHash[region].forEach(country => {
+            selectedCountryHash[country] = true;
+            applySelectedStyles(d3version6.selectAll(`#world-map .${country}`));
+        });
+
+        // keys will get all of the countries
+        Object.keys(selectedCountryHash).forEach(selectedCountry => {
+            if (!regionCountryHash[region].includes(selectedCountry)) {
+                selectedCountryHash[selectedCountry] = false;
+                applyUnselectedStyles(d3version6.selectAll(`#world-map .${selectedCountry}`));
+            }
+        })
+    }
+
     createScatterPlot();
     createBarPlot();
     updateScoreboard();

@@ -134,25 +134,28 @@ const createBarPlot = () => {
 
     //plot the datapoints
     for (let x = xIndex; x < selectSize+xIndex; x++) {
-        bplot.append('rect')
-            .attr('x', barMargin.left+1+(x-xIndex)*xbarscale)
-            .attr('y', barPlotHeight-barMargin.bottom-dataHash[year][x][attr1]*ybarscale-1)
-            .attr("width", xbarscale-1)
-            .attr("height",dataHash[year][x][attr1]*ybarscale)
-            //.attr('fill', color[0])
-            .attr("fill", "#69b3a2")
-            .attr('opacity', '0.5')
-            .attr('id', `bp-${dataHash[year][x]['Country'].toLowerCase().replaceAll(' ', '-')}`)
-            .on("mouseover", function (event, d) {
-                let temp = d3version6.select(this).attr('id')
-                updateOn(temp.substring(3, temp.length));
-            })
-            .on("mouseout", function (d) {
-                let temp = d3version6.select(d.target).attr('id')
-                updateOff(temp.substring(3, temp.length));
-            });
-        }
+        if (selectedCountryHash[dataHash[year][x]['Country'].toLowerCase().replaceAll(' ', '-')]) {
 
+            bplot.append('rect')
+                .attr('x', barMargin.left + 1 + (x - xIndex) * xbarscale)
+                .attr('y', barPlotHeight - barMargin.bottom - dataHash[year][x][attr1] * ybarscale - 1)
+                .attr("width", xbarscale - 1)
+                .attr("height", dataHash[year][x][attr1] * ybarscale)
+                //.attr('fill', color[0])
+                .attr("fill", "#69b3a2")
+                .attr('opacity', '0.5')
+                .attr('class', 'selected')
+                .attr('id', `bp-${dataHash[year][x]['Country'].toLowerCase().replaceAll(' ', '-')}`)
+                .on("mouseover", function (event, d) {
+                    let temp = d3version6.select(this).attr('id')
+                    updateOn(temp.substring(3, temp.length));
+                })
+                .on("mouseout", function (d) {
+                    let temp = d3version6.select(d.target).attr('id')
+                    updateOff(temp.substring(3, temp.length));
+                });
+        }
+    }
     for (let i = 0; i < dataHash[year].length; i++) {
         bplot.append('rect')
             .attr('x', barMargin.left+(i*bplotwt/dataHash[year].length))
