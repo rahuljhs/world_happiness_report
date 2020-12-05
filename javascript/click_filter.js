@@ -18,8 +18,8 @@ const filterCountries = (target) => {
     let splotCountry = splot.select(`#${classList[2]}`)
     let bplotCountry = bplot.select(`#bp-${classList[2]}`)
 
-    splotCountry.classed('selected', !splotCountry.classed('selected')).style('visibility', 'visible');
-    splot.selectAll(`circle:not(.selected)`).style('visibility', 'hidden');
+    splotCountry.classed('selected', !splotCountry.classed('selected')).style('fill', color[0]);
+    splot.selectAll(`circle:not(.selected)`).style('fill', "#cccccc");
 
     if (!bplotCountry.empty()) {
         bplotCountry.classed('selected', !bplotCountry.classed('selected')).style('visibility', 'visible');

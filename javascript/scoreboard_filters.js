@@ -19,7 +19,7 @@ const updateOn = (countryName) => {
     }
     splot.select(`#${countryName}`)
         .attr("opacity", opacityOn)
-        .attr('r', '5');
+        .attr('r', '6');
 
     bplot.select(`#bp-${countryName}`)
         .attr('opacity','1')
@@ -32,7 +32,7 @@ const updateOff = (countryName) => {
     let attr2 = document.getElementById("attribute2").value; //this will need to be updated by the filter input: Attribute 2
     splot.select(`#${countryName}`)
         .attr("opacity", opacityOff)
-        .attr('r', '3');
+        .attr('r', '4');
     bplot.select(`#bp-${countryName}`)
         .attr('opacity','0.5')
     d3version6.select('#scoreboardTitle')

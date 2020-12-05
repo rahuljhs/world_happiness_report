@@ -56,7 +56,23 @@ div.tooltip {
 }
 
 .scoreboard {
-    width: 400px;
+    width: 600px;
+}
+
+#scoreboardTitle {
+    border: none;
+    font-size: 20px;
+    height: 40px;
+}
+
+#scoreboardMain {
+    border-width: 3px;
+    border-color: black;
+    margin-left: 30px;
+}
+
+#scatter-plot {
+    margin-left: 20px;
 }
 
 .flex-container {
@@ -76,30 +92,24 @@ div.tooltip {
 
 .data {
     flex-direction: row;
-    width: 400px;
+    width: 600px;
     align-content: center;
     text-align: center;
 }
 .cell {
-    width: 200px;
+    width: 300px;
     height: 40px;
-    text-align: left;
+    text-align: center;
 }
 
-#scoreboardTitle {
-    font-size: 20px;
-}
 
-.xAxis {
-    font: 10px sans-serif;
-}
-.xAxis path,
-.xAxis line {
+.axis path,
+.axis line {
     fill: none;
-    stroke: #000;
-    shape-rendering: crispEdges;
+    stroke: #000000;
     stroke-width: 1px;
 }
+
 
 body {
     font-family: Arial, Helvetica, sans-serif;
