@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>World Happiness Report Test</title>
+    <title>World Happiness Report</title>
     <script src="https://d3js.org/d3.v6.js"></script>
     <script>d3version6 = d3
         window.d3 = null</script>
@@ -84,7 +84,7 @@
         <div class="viz-item">
             <div class="viz-item" style="flex-direction: column;">
                 <div class="viz-item">
-                    <svg id="legend" height="120px" width="600px"</svg>
+                    <svg id="legend"></svg>
                 </div>
                 <div class="viz-item">
                     <svg id="world-map" height="500px" width="600px"></svg>
@@ -114,7 +114,8 @@
 
 
     <script src="javascript/scoreboard_filters.js" type="application/javascript"></script>
-    <script>const files = [];
+    <script>
+        const files = [];
         const selectedCountryHash = {};
         const regionCountryHash = {};
         files.push(d3version6.csv("data/2015.csv"));
