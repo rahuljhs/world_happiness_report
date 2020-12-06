@@ -5,11 +5,90 @@ const noDataCountryColor = 'lightgrey';
 const disabledCountryColor = '#808080';
 const enabledCountryColor = 'white';
 
+const heatmap_colors = ['#7f3b08','#b35806','#e08214','#fdb863','#fee0b6','#d8daeb','#b2abd2','#8073ac','#542788','#2d004b'];
+
+const get_range = (year, attr1) => {
+    var min_attr = 0;
+    var max_attr = 0;
+    for (let x = 0; x < dataHash[year].length; x++) {
+        let attribute_value = Number(dataHash[year][x][attr1]);
+        if (x == 0){
+            min_attr = attribute_value;
+            max_attr = attribute_value;
+        }
+        else{
+            if (attribute_value < min_attr){
+                min_attr = attribute_value;
+            }
+            if (attribute_value > max_attr){
+                max_attr = attribute_value;
+        }}
+    }
+    return [min_attr, max_attr - min_attr];
+}
+
+const get_color = (attribute_value, min_attr, attr_range) => {
+    if (attribute_value < min_attr+0.1*attr_range) {
+        return heatmap_colors[0];
+    }
+    else if (attribute_value >= min_attr+0.1*attr_range && attribute_value < min_attr+0.2*attr_range) {
+        return heatmap_colors[1];
+    }
+    else if (attribute_value >= min_attr+0.2*attr_range && attribute_value < min_attr+0.3*attr_range) {
+        return heatmap_colors[2];
+    }
+    else if (attribute_value >= min_attr+0.3*attr_range && attribute_value < min_attr+0.4*attr_range) {
+        return heatmap_colors[3];
+    }
+    else if (attribute_value >= min_attr+0.4*attr_range && attribute_value < min_attr+0.5*attr_range) {
+        return heatmap_colors[4];
+    }
+    else if (attribute_value >= min_attr+0.5*attr_range && attribute_value < min_attr+0.6*attr_range) {
+        return heatmap_colors[5];
+    }
+    else if (attribute_value >= min_attr+0.6*attr_range && attribute_value < min_attr+0.7*attr_range) {
+        return heatmap_colors[6];
+    }
+    else if (attribute_value >= min_attr+0.7*attr_range && attribute_value < min_attr+0.8*attr_range) {
+        return heatmap_colors[7];
+    }
+    else if (attribute_value >= min_attr+0.8*attr_range && attribute_value < min_attr+0.9*attr_range) {
+        return heatmap_colors[8];
+    }
+    else if (attribute_value >= min_attr+0.9*attr_range) {
+        return heatmap_colors[9];
+    }
+}
+
+const update_heatmap = () => {
+    let attr1 = document.getElementById("attribute1").value;
+    let year = document.getElementById("year").value;
+    var range_values = get_range(year, attr1);
+
+    for (let x = 0; x < dataHash[year].length; x++) {
+        let country_name = dataHash[year][x]['Country'].toLowerCase().replaceAll(' ', '-')
+        if (selectedCountryHash[country_name]){
+            let attribute_value = Number(dataHash[year][x][attr1]);
+            let color = get_color(attribute_value, range_values[0], range_values[1]);
+            map.select(`.${country_name}`).style('fill', color);
+        }
+        }
+}
+
+const get_attr1_for_country = (country_name_from_data, year, attr1) =>{
+    for (let x = 0; x < dataHash[year].length; x++) {
+        let attribute_value = Number(dataHash[year][x][attr1]);
+        let country_name = dataHash[year][x]['Country'].toLowerCase().replaceAll(' ', '-')
+        if (country_name == country_name_from_data) {
+            return attribute_value;
+        }
+    }
+}
+
 const determine_country_color = (data, color='white') => {
     if (data['properties']['no_data'] === true) {
         color = noDataCountryColor;
     }
-
     return color;
 }
 const addClassesToMap = (d) => {
@@ -81,14 +160,14 @@ const createWorldMap = (mapData) => {
         .on('mouseenter', (d) => {
             const target = d3version6.select(d.target);
             if (target.attr('class').includes('region-enabled')) {
-                target.style('fill', d => determine_country_color(d, 'purple'));
+                target.style('opacity', '0.5');
                 updateOn(target.attr('class').split(/[ ,]+/)[2]);
             }
         })
         .on('mouseleave', (d) => {
             const target = d3version6.select(d.target);
             if (target.attr('class').includes('region-enabled')) {
-                target.style('fill', d => determine_country_color(d, 'white'))
+                target.style('opacity', '1')
                 updateOff(target.attr('class').split(/[ ,]+/)[2]);
             }
         })
@@ -155,5 +234,6 @@ const filterCountryRegion = (newRegion) => {
 
 worldMapPromise.then(data => {
     createWorldMap(data);
+    update_heatmap();
 });
 

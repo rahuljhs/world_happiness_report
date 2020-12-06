@@ -1,6 +1,6 @@
 const scatterPlotHeight = 500;
 const scatterPlotWidth = 600;
-const color = ['#d73027', '#fc8d59', '#fee090', '#e0f3f8', '#91bfdb', '#4575b4'];
+const color = ['#7f3b08', '#b35806', '#e08214', '#fdb863', '#fee0b6', '#d8daeb', '#b2abd2', '#8073ac', '#542788', '#2d004b'];
 
 var margin = { top: 50, bottom: 40, left: 70, right: 20 };
 
@@ -75,7 +75,7 @@ const createScatterPlot = () => {
                 .attr('cx', (dataHash[year][x][attr1]) * xscale + margin.left)
                 .attr('cy', plotht + margin.top - (dataHash[year][x][attr2] * yscale))
                 .attr('r', '4')
-                .attr('fill', color[0])
+                .attr('fill', color[2])
                 .attr('opacity', '0.5')
                 .attr('class', 'selected')
                 .attr('id', dataHash[year][x]['Country'].toLowerCase().replaceAll(' ', '-'))
@@ -95,7 +95,7 @@ const createScatterPlot = () => {
                         .attr('cx', (dataHash[year][x][attr1]) * xscale + margin.left)
                         .attr('cy', plotht + margin.top - (dataHash[year][x][attr2] * yscale))
                         .attr('r', '4')
-                        .attr('fill', color[0])
+                        .attr('fill', color[2])
                         .attr('opacity', '0.5')
                         .attr('class', 'selected')
                         .attr('id', dataHash[year][x]['Country'].toLowerCase().replaceAll(' ', '-'))

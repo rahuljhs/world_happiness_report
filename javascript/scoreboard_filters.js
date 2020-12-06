@@ -22,10 +22,10 @@ const updateOn = (countryName, selected= true) => {
         .attr('r', '6');
 
     bplot.select(`#bp-${countryName}`)
-        .attr('opacity','1')
+        .attr('opacity','1');
 
     if (selected) {
-        map.select(`.${countryName}`).style('fill', d => determine_country_color(d, 'purple'));
+        map.select(`.${countryName}`).style('opacity', '0.5');
     }
 }
 
@@ -48,9 +48,7 @@ const updateOff = (countryName, selected= true) => {
     d3version6.select('#sb-attr-2')
         .text(`${attr2}:`);
     if (selected) {
-        map.select(`.${countryName}`).style('fill', d => {
-            return determine_country_color(d, 'white');
-        })
+        map.select(`.${countryName}`).style('opacity', '1');
     }
 }
 

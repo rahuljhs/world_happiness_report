@@ -1,7 +1,7 @@
 ﻿const legend = d3version6.select('#legend');
 const legMargin = { top: 10, bottom: 10, left: 40, right: 40 };
 
-const legColors = ['#d73027', '#fc8d59', '#fee090', '#e0f3f8', '#91bfdb', '#4575b4', '#d73027', '#fc8d59', '#fee090', '#e0f3f8'];
+const legColors = ['#7f3b08', '#b35806', '#e08214', '#fdb863', '#fee0b6', '#d8daeb', '#b2abd2', '#8073ac', '#542788', '#2d004b'];
 const legLabels = ['<10%', '10-20%', '20-30%', '30-40%', '40-50%', '50-60%', '60-70%', '70-80%', '80-90%', '90-100%']
 const cirRad = 15;
 
