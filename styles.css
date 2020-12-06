@@ -75,7 +75,6 @@ div.tooltip {
     margin-left: 20px;
 }
 
-
 .flex-container {
     display: flex;
     flex-direction: column;
@@ -102,7 +101,6 @@ div.tooltip {
     height: 40px;
     text-align: center;
 }
-
 
 .axis path,
 .axis line {

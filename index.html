@@ -137,8 +137,8 @@
         let allFilesPromise = Promise.all(files).then((data) => {
             data.forEach((dataFileContents, index) => {
                 dataHash[`201${index + 5}`] = dataFileContents;
-            })
-            dataHash['2015'].forEach(countryData => {
+            });
+            dataHash['2015'].forEach( countryData => {
                 let country = countryData['Country'].toLowerCase().replaceAll(' ', '-')
                 selectedCountryHash[country] = true;
                 let region = countryData['Region'].toLowerCase().replaceAll(' ', '-')
