@@ -1,16 +1,16 @@
-const scatterPlotHeight = 400;
-const scatterPlotWidth = 400;
+const scatterPlotHeight = 500;
+const scatterPlotWidth = 600;
 const color = ['#d73027', '#fc8d59', '#fee090', '#e0f3f8', '#91bfdb', '#4575b4'];
 
-var margin = { top: 40, bottom: 40, left: 50, right: 20 };
+var margin = { top: 50, bottom: 40, left: 70, right: 20 };
 
 var plotht = scatterPlotHeight - margin.top - margin.bottom;
 var plotwt = scatterPlotWidth - margin.left - margin.right;
 
-    const splot = d3version6.select('#scatter-plot');
+const splot = d3version6.select('#scatter-plot');
 
 const opacityOn = 1;
-const opacityOff = .5;
+const opacityOff = .6;
 
 
 // The color is just there to make sure code is working.  Feel Free to delete when working in this file!
@@ -20,8 +20,7 @@ const createScatterPlot = () => {
     let attr2 = document.getElementById("attribute2").value; //this will need to be updated by the filter input: Attribute 2
     let reg = document.getElementById("region").value;
 
-    d3version6.select('#scatter-plot')
-        .style('width', `${scatterPlotWidth}px`)
+    splot.style('width', `${scatterPlotWidth}px`)
         .style('height', `${scatterPlotHeight}px`)
         .style('background-color', 'white')
         .append('g');
@@ -75,7 +74,7 @@ const createScatterPlot = () => {
             splot.append('circle')
                 .attr('cx', (dataHash[year][x][attr1]) * xscale + margin.left)
                 .attr('cy', plotht + margin.top - (dataHash[year][x][attr2] * yscale))
-                .attr('r', '3')
+                .attr('r', '4')
                 .attr('fill', color[0])
                 .attr('opacity', '0.5')
                 .attr('class', 'selected')
@@ -95,7 +94,7 @@ const createScatterPlot = () => {
                     splot.append('circle')
                         .attr('cx', (dataHash[year][x][attr1]) * xscale + margin.left)
                         .attr('cy', plotht + margin.top - (dataHash[year][x][attr2] * yscale))
-                        .attr('r', '3')
+                        .attr('r', '4')
                         .attr('fill', color[0])
                         .attr('opacity', '0.5')
                         .attr('class', 'selected')
@@ -109,6 +108,42 @@ const createScatterPlot = () => {
                             updateOff(temp);
                         });
                 }
+                else {
+                    splot.append('circle')
+                        .attr('cx', (dataHash[year][x][attr1]) * xscale + margin.left)
+                        .attr('cy', plotht + margin.top - (dataHash[year][x][attr2] * yscale))
+                        .attr('r', '4')
+                        .attr('fill', "#cccccc")
+                        .attr('opacity', '0.5')
+                        .attr('class', 'selected')
+                        .attr('id', dataHash[year][x]['Country'].toLowerCase().replaceAll(' ', '-'))
+                        .on("mouseover", function (event, d) {
+                            let temp = d3version6.select(this).attr('id');
+                            updateOn(temp);
+                        })
+                        .on("mouseout", function (d) {
+                            let temp = d3version6.select(this).attr('id');
+                            updateOff(temp);
+                        });
+                }
+            }
+            else {
+                splot.append('circle')
+                    .attr('cx', (dataHash[year][x][attr1]) * xscale + margin.left)
+                    .attr('cy', plotht + margin.top - (dataHash[year][x][attr2] * yscale))
+                    .attr('r', '4')
+                    .attr('fill', "#cccccc")
+                    .attr('opacity', '0.5')
+                    .attr('class', 'selected')
+                    .attr('id', dataHash[year][x]['Country'].toLowerCase().replaceAll(' ', '-'))
+                    .on("mouseover", function (event, d) {
+                        let temp = d3version6.select(this).attr('id');
+                        updateOn(temp);
+                    })
+                    .on("mouseout", function (d) {
+                        let temp = d3version6.select(this).attr('id');
+                        updateOff(temp);
+                    });
             }
         }
     }
