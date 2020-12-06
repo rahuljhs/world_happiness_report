@@ -5,7 +5,7 @@ const legColors = ['#7f3b08', '#b35806', '#e08214', '#fdb863', '#fee0b6', '#d8da
 const legLabels = ['<10%', '10-20%', '20-30%', '30-40%', '40-50%', '50-60%', '60-70%', '70-80%', '80-90%', '90-100%']
 const cirRad = 15;
 
-const legHeight = 120;
+const legHeight = 160 ;
 const legWidth = 600;
 
 legend.style("background-color", "white").attr('height', legHeight).attr('width', legWidth);
@@ -43,6 +43,18 @@ legend.append('g')
     .attr("dy", ".15em")
     .attr("transform", "rotate(-45)");
 
+
+//scatter plot title
+
+attr1 = document.getElementById("attribute1").value;
+year = document.getElementById("year").value;
+
+legend.append('text')
+    .text("Percentile of " + attr1 + " in " + year)
+    .attr('x', legWidth/2)
+    .attr('y', legHeight - 20)
+    .style('font-size', "20px")
+    .style('text-anchor', 'middle');
 
 //legend.append('circle')
 //    .attr('cx', 300)
