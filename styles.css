@@ -102,12 +102,15 @@ div.tooltip {
     text-align: center;
 }
 
-
 .axis path,
 .axis line {
     fill: none;
     stroke: #000000;
     stroke-width: 1px;
+}
+
+.axis text {
+    font: 10px sans-serif;
 }
 
 body {
