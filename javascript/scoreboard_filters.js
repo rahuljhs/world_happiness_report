@@ -24,7 +24,7 @@ const updateOn = (countryName) => {
     bplot.select(`#bp-${countryName}`)
         .attr('opacity','1')
    
-    map.select(`.${countryName}`).style('fill', d => determine_country_color(d, 'purple'));
+    map.select(`.${countryName}`).style('opacity', '0.5');
 }
 
 const updateOff = (countryName) => {
@@ -45,9 +45,7 @@ const updateOff = (countryName) => {
         .text(`${attr1}:`);
     d3version6.select('#sb-attr-2')
         .text(`${attr2}:`);
-    map.select(`.${countryName}`).style('fill', d => {
-        return determine_country_color(d, 'white');
-    })
+    map.select(`.${countryName}`).style('opacity', '1');
 }
 
 const updateScoreboard = () => {
