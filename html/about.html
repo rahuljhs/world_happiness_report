@@ -24,20 +24,47 @@
 
 <div class="text-container">
     <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Leo duis ut diam quam. Massa placerat duis ultricies lacus sed turpis. Velit ut tortor pretium viverra suspendisse potenti nullam. Integer quis auctor elit sed vulputate mi sit amet. Maecenas accumsan lacus vel facilisis volutpat est velit. Tristique nulla aliquet enim tortor at auctor. Sit amet nisl suscipit adipiscing bibendum. Euismod in pellentesque massa placerat duis ultricies lacus. Elementum sagittis vitae et leo. Justo laoreet sit amet cursus sit amet dictum sit amet. Nisi lacus sed viverra tellus. Morbi tristique senectus et netus et malesuada fames. A pellentesque sit amet porttitor eget. Praesent semper feugiat nibh sed pulvinar proin.
+        The dataset chosen for our project is the world happiness report spanning the years 2015-2019.
+        The world happiness report presents scores and rankings acquired from Gallup World Poll by asking
+        “respondents to think of a ladder with the best possible life for them being a 10 and the worst possible life
+        being a 0 and to rate their own current lives on that scale” (quoted pulled from the linked kaggle dataset description).
+        The dataset also includes other interesting attributes that may contribute to happiness such as:
+    </p>
+    <ul>
+        <li>Economy (GPD per capita)</li>
+        <li>Family</li>
+        <li>Freedom</li>
+        <li>Dystopian Residual</li>
+        <li>And more</li>
+    </ul>
+    <h3 style="margin-top: 0; margin-bottom: 5px;">Data Manipulation: </h3>
+    <p>
+        Since the data we were using was distributed across 5 different files, representing the years 2015-2019,
+        the data needed to be curated to make sure things such as regions, countries, and variables all matched names
+        and casing.  Most of the changes to the csv files were done manually using find and replace features in an IDE.
     </p>
     <p>
-        Aliquet nec ullamcorper sit amet. Ornare suspendisse sed nisi lacus sed viverra. Pretium vulputate sapien nec sagittis aliquam malesuada bibendum. Quis ipsum suspendisse ultrices gravida dictum fusce ut placerat. Sed nisi lacus sed viverra tellus in hac. Vel turpis nunc eget lorem dolor. Vitae tortor condimentum lacinia quis vel. Vulputate mi sit amet mauris. Ipsum dolor sit amet consectetur adipiscing. Ultricies mi eget mauris pharetra et ultrices neque ornare. Egestas erat imperdiet sed euismod nisi porta lorem mollis aliquam. Posuere urna nec tincidunt praesent semper feugiat nibh sed pulvinar. Pellentesque diam volutpat commodo sed egestas egestas fringilla. Nulla facilisi nullam vehicula ipsum a arcu cursus. Sed viverra ipsum nunc aliquet bibendum enim facilisis. Est ultricies integer quis auctor elit. Duis convallis convallis tellus id interdum velit. Neque convallis a cras semper. Congue quisque egestas diam in.
+        The world map visualization, brought a whole new challenge to normalizing the data.  Considering that the world
+        map data was found from a completely different data source and that it had to be translated using an online
+        geojson translation tool, the country and region names did not match.  Actually, the regions were not event present.
+        To mitigate this issue, we wrote a python script to map the names of the countries to those in one of the
+        csv files.  After doing that we wrote another function in the same python script to add the regions from one of the csv
+        files to the geojson properties of the country objects.  In doing so, the country names, ids, and regions were all
+        present and usable when drawing the world map in our visualization.
     </p>
-    <p>
-        Scelerisque in dictum non consectetur. Porttitor rhoncus dolor purus non enim praesent. Eget mi proin sed libero enim sed faucibus turpis in. In est ante in nibh mauris. Ut faucibus pulvinar elementum integer enim neque volutpat ac tincidunt. Eu augue ut lectus arcu. Eget arcu dictum varius duis at consectetur lorem. Tincidunt eget nullam non nisi est sit amet facilisis. Pharetra convallis posuere morbi leo. Sem nulla pharetra diam sit. Dignissim convallis aenean et tortor at risus. Tempor orci dapibus ultrices in iaculis nunc. Urna condimentum mattis pellentesque id nibh tortor id. Ut faucibus pulvinar elementum integer enim neque volutpat ac. Aliquam id diam maecenas ultricies mi eget mauris. Auctor eu augue ut lectus arcu bibendum at.
-    </p>
-    <p>
-        Id aliquet lectus proin nibh nisl condimentum. Egestas egestas fringilla phasellus faucibus scelerisque eleifend. Proin sed libero enim sed faucibus turpis in eu mi. Arcu felis bibendum ut tristique. Morbi blandit cursus risus at ultrices mi. Ut lectus arcu bibendum at varius vel. Commodo sed egestas egestas fringilla phasellus faucibus scelerisque eleifend donec. Id aliquet lectus proin nibh nisl condimentum id venenatis a. Quisque non tellus orci ac auctor augue mauris. In dictum non consectetur a. Orci nulla pellentesque dignissim enim sit amet venenatis urna cursus. Aliquet eget sit amet tellus cras adipiscing enim. Risus at ultrices mi tempus imperdiet nulla malesuada pellentesque. Sed adipiscing diam donec adipiscing tristique risus nec feugiat. Pellentesque diam volutpat commodo sed egestas egestas fringilla phasellus faucibus. Condimentum mattis pellentesque id nibh tortor. Pulvinar elementum integer enim neque volutpat ac tincidunt vitae. Interdum posuere lorem ipsum dolor sit amet consectetur adipiscing elit. Nisl condimentum id venenatis a condimentum vitae sapien pellentesque.
-    </p>
-    <p>
-        Felis imperdiet proin fermentum leo vel orci porta. Diam in arcu cursus euismod quis viverra nibh. Est ante in nibh mauris cursus mattis molestie a iaculis. A lacus vestibulum sed arcu non odio euismod lacinia. Faucibus et molestie ac feugiat sed lectus vestibulum mattis ullamcorper. Eu turpis egestas pretium aenean pharetra magna ac. Dui vivamus arcu felis bibendum. Tincidunt dui ut ornare lectus sit amet est placerat. Aenean et tortor at risus. Turpis in eu mi bibendum neque. Euismod quis viverra nibh cras. Enim facilisis gravida neque convallis a cras. Sit amet venenatis urna cursus eget nunc. Viverra nam libero justo laoreet sit amet. Blandit turpis cursus in hac habitasse platea dictumst quisque. Porta nibh venenatis cras sed. A iaculis at erat pellentesque adipiscing commodo elit at imperdiet. Egestas purus viverra accumsan in nisl nisi.
-    </p>
+    <h3 style="margin-top: 10px; margin-bottom: 5px;">Data Sources: </h3>
+    <ul>
+        <li>
+            <a href="https://www.kaggle.com/unsdsn/world-happiness">World Happiness Data</a>
+        </li>
+        <li>
+            <a href="https://raw.githubusercontent.com/janasayantan/datageojson/master/world.json">Original World Map Data (Before Conversion)</a>
+        </li>
+        <li>
+            <a href="https://mygeodata.cloud">Online Geojson Conversion Tool</a>
+        </li>
+    </ul>
+
 </div>
 </body>
 </html>
