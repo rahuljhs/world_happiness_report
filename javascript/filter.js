@@ -4,6 +4,7 @@ document.getElementById("year").onchange = function () {
     d3version3.selectAll("#bar-plot > *").remove();
     createScatterPlot();
     createBarPlot();
+    update_heatmap();
 }
 document.getElementById("attribute1").onchange = function () {
     //console.log("attr1 update");
@@ -12,6 +13,7 @@ document.getElementById("attribute1").onchange = function () {
     createScatterPlot();
     createBarPlot();
     updateScoreboard();
+    update_heatmap();
 }
 document.getElementById("attribute2").onchange = function () {
     d3version3.selectAll("#scatter-plot > *").remove();
@@ -46,4 +48,5 @@ document.getElementById("region").onchange = function (changeEvent) {
     createBarPlot();
     updateScoreboard();
     filterCountryRegion(newRegion);
+    update_heatmap();
 }
