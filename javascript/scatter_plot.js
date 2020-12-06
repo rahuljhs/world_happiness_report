@@ -80,12 +80,12 @@ const createScatterPlot = () => {
                 .attr('class', 'selected')
                 .attr('id', dataHash[year][x]['Country'].toLowerCase().replaceAll(' ', '-'))
                 .on("mouseover", function (event, d) {
-                    temp = d3version6.select(this).attr('id');
-                    updateOn(temp);
+                    let temp = d3version6.select(this).attr('id');
+                    updateOn(temp, selectedCountryHash[temp]);
                 })
                 .on("mouseout", function (d) {
-                    temp = d3version6.select(this).attr('id');
-                    updateOff(temp);
+                    let temp = d3version6.select(this).attr('id');
+                    updateOff(temp, selectedCountryHash[temp]);
                 });
         }
         else {
@@ -101,11 +101,11 @@ const createScatterPlot = () => {
                         .attr('id', dataHash[year][x]['Country'].toLowerCase().replaceAll(' ', '-'))
                         .on("mouseover", function (event, d) {
                             let temp = d3version6.select(this).attr('id');
-                            updateOn(temp);
+                            updateOn(temp, selectedCountryHash[temp]);
                         })
                         .on("mouseout", function (d) {
                             let temp = d3version6.select(this).attr('id');
-                            updateOff(temp);
+                            updateOff(temp, selectedCountryHash[temp]);
                         });
                 }
                 else {
@@ -119,11 +119,11 @@ const createScatterPlot = () => {
                         .attr('id', dataHash[year][x]['Country'].toLowerCase().replaceAll(' ', '-'))
                         .on("mouseover", function (event, d) {
                             let temp = d3version6.select(this).attr('id');
-                            updateOn(temp);
+                            updateOn(temp, selectedCountryHash[temp]);
                         })
                         .on("mouseout", function (d) {
                             let temp = d3version6.select(this).attr('id');
-                            updateOff(temp);
+                            updateOff(temp, selectedCountryHash[temp]);
                         });
                 }
             }
@@ -138,11 +138,11 @@ const createScatterPlot = () => {
                     .attr('id', dataHash[year][x]['Country'].toLowerCase().replaceAll(' ', '-'))
                     .on("mouseover", function (event, d) {
                         let temp = d3version6.select(this).attr('id');
-                        updateOn(temp);
+                        updateOn(temp, selectedCountryHash[temp]);
                     })
                     .on("mouseout", function (d) {
                         let temp = d3version6.select(this).attr('id');
-                        updateOff(temp);
+                        updateOff(temp, selectedCountryHash[temp]);
                     });
             }
         }

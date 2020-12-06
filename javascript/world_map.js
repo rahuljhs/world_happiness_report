@@ -230,9 +230,6 @@ const filterCountryRegion = (newRegion) => {
             }
             return '0.3';
         })
-
-
-
 };
 
 worldMapPromise.then(data => {
