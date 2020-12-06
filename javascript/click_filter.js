@@ -18,7 +18,7 @@ const filterCountries = (target) => {
     let splotCountry = splot.select(`#${classList[2]}`)
     let bplotCountry = bplot.select(`#bp-${classList[2]}`)
 
-    splotCountry.classed('selected', !splotCountry.classed('selected')).style('fill', color[0]);
+    splotCountry.classed('selected', !splotCountry.classed('selected')).style('fill', color[2]);
     splot.selectAll(`circle:not(.selected)`).style('fill', "#cccccc");
 
     if (!bplotCountry.empty()) {
