@@ -219,21 +219,23 @@ const filterCountryRegion = (newRegion) => {
         .style('stroke', d => {
             let target = d3version6.select(`#world-map .${d['properties']['name'].toLowerCase().replaceAll(' ', '-')}`)
             if (target.classed('selected')) {
-                return 'yellow';
+                return 'black';
             }
-            return 'black';
+            return 'lightgrey';
         })
         .style('stroke-width', d => {
             let target = d3version6.select(`#world-map .${d['properties']['name'].toLowerCase().replaceAll(' ', '-')}`)
             if (target.classed('selected')) {
-                return '1.5';
+                return '0.8';
             }
             return '0.3';
         })
 };
 
 worldMapPromise.then(data => {
-    createWorldMap(data);
-    update_heatmap();
+    allFilesPromise.then(() => {
+        createWorldMap(data);
+        update_heatmap();
+    })
 });
 
