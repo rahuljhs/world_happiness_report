@@ -23,6 +23,7 @@ document.getElementById("attribute2").onchange = function () {
 document.getElementById("region").onchange = function (changeEvent) {
     const newRegion = changeEvent.target.value;
     d3version3.selectAll("#scatter-plot > *").remove();
+    d3version3.selectAll("#bar-plot > *").remove();
     let region = newRegion.toLowerCase().replaceAll(' ', '-');
     if (newRegion === 'All') {
         Object.keys(selectedCountryHash).forEach(selectedCountry => {
