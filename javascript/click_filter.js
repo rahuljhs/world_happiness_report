@@ -23,9 +23,7 @@ const filterCountries = (target) => {
         Object.entries(selectedCountryHash).forEach((keyValArr) => selectedCountryHash[keyValArr[0]] = true);
         d3version6.selectAll('#world-map .region-enabled').classed('selected', true);
         createScatterPlot()
-        // d3version6.selectAll('#scatter-plot circle').classed('selected', true);
         d3version6.selectAll('#bar-plot rect').classed('selected', true);
-        // d3version6.selectAll('#scatter-plot circle').style('fill', color[2]);
         d3version6.selectAll('#bar-plot rect').style('fill', color[9]);
     } else {
         let splotCountry = splot.select(`#${classList[2]}`)
