@@ -230,6 +230,11 @@ const filterCountryRegion = (newRegion) => {
             }
             return '0.3';
         })
+        Object.entries(selectedCountryHash).forEach((keyValArr) => selectedCountryHash[keyValArr[0]] = false);
+        d3version6.selectAll('#world-map .selected').each(d => {
+            let countryName = d['properties']['name'].toLowerCase().replaceAll(' ', '-');
+            selectedCountryHash[countryName] = true;
+        })
 };
 
 worldMapPromise.then(data => {
