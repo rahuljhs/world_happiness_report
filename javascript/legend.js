@@ -12,8 +12,6 @@ legend.style("background-color", "white").attr('height', legHeight).attr('width'
 
 let legPad = (legWidth - legMargin.right - legMargin.left - legColors.length * (2 * cirRad))/ (legColors.length -1 );
 
-console.log(legend.attr('height'));
-
 for (let x = 0; x < legColors.length; x++) {
     legend.append('circle')
         .attr('cx', legMargin.right + cirRad + x * (2 * cirRad + legPad))
@@ -21,7 +19,6 @@ for (let x = 0; x < legColors.length; x++) {
         .attr('r', cirRad)
         .attr('fill', legColors[x])
         .attr('opacity', '1');
-    console.log('legend cirlce: ' + x);
 }
 
 
