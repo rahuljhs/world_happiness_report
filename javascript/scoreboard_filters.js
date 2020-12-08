@@ -21,7 +21,7 @@ const updateOn = (countryName, selected= true) => {
         .attr("opacity", opacityOn)
         .attr('r', '6');
 
-    bplot.select(`#${countryName}`)
+    bplot.select(`#bp-${countryName}`)
         .attr('opacity','1');
 
     if (selected) {
@@ -35,8 +35,6 @@ const updateOff = (countryName, selected= true) => {
     splot.select(`#${countryName}`)
         .attr("opacity", opacityOff)
         .attr('r', '4');
-    bplot.select(`#${countryName}`)
-        .attr('opacity','0.5')
     bplot.select(`#bp-${countryName}`)
         .attr('opacity','0.5')
     d3version6.select('#scoreboardTitle')
