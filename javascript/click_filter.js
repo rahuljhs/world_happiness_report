@@ -34,10 +34,9 @@ const filterCountries = (target) => {
 }
 
 const applySelectedStyles = (target) => {
-    console.log(target);
-    target.style('stroke', 'black').style('stroke-width', '0.8')
+    // target.style('stroke', 'black').style('stroke-width', '0.8')
 }
 
 const applyUnselectedStyles = (target) => {
-    target.style('stroke', 'lightgrey').style('stroke-width', '0.3')
+    // target.style('stroke', 'lightgrey').style('stroke-width', '0.3')
 }

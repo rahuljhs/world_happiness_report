@@ -116,3 +116,11 @@ body {
 .text-container {
     width: 75%
 }
+
+#world-map path.country:not(.selected) {
+    fill: white !important;
+}
+
+#world-map path.country.region-disabled {
+    fill: lightgrey !important;
+}
