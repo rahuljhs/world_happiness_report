@@ -1,5 +1,5 @@
 ﻿const map = d3version6.select('#world-map');
-const updateOn = (countryName) => {
+const updateOn = (countryName, selected= true) => {
     let year = document.getElementById("year").value; //this will need to be updated by the filter input: Year
     let attr1 = document.getElementById("attribute1").value; //this will need to be updated by the filter input: Attribute 1
     let attr2 = document.getElementById("attribute2").value; //this will need to be updated by the filter input: Attribute 2
@@ -21,18 +21,22 @@ const updateOn = (countryName) => {
         .attr("opacity", opacityOn)
         .attr('r', '6');
 
-    bplot.select(`#bp-${countryName}`)
-        .attr('opacity','1')
-   
-    map.select(`.${countryName}`).style('fill', d => determine_country_color(d, 'purple'));
+    bplot.select(`#${countryName}`)
+        .attr('opacity','1');
+
+    if (selected) {
+        map.select(`.${countryName}`).style('opacity', '0.5');
+    }
 }
 
-const updateOff = (countryName) => {
+const updateOff = (countryName, selected= true) => {
     let attr1 = document.getElementById("attribute1").value; //this will need to be updated by the filter input: Attribute 1
     let attr2 = document.getElementById("attribute2").value; //this will need to be updated by the filter input: Attribute 2
     splot.select(`#${countryName}`)
         .attr("opacity", opacityOff)
         .attr('r', '4');
+    bplot.select(`#${countryName}`)
+        .attr('opacity','0.5')
     bplot.select(`#bp-${countryName}`)
         .attr('opacity','0.5')
     d3version6.select('#scoreboardTitle')
@@ -45,9 +49,9 @@ const updateOff = (countryName) => {
         .text(`${attr1}:`);
     d3version6.select('#sb-attr-2')
         .text(`${attr2}:`);
-    map.select(`.${countryName}`).style('fill', d => {
-        return determine_country_color(d, 'white');
-    })
+    if (selected) {
+        map.select(`.${countryName}`).style('opacity', '1');
+    }
 }
 
 const updateScoreboard = () => {
