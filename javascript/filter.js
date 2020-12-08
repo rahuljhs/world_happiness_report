@@ -4,6 +4,7 @@ document.getElementById("year").onchange = function () {
     createScatterPlot();
     createBarPlot();
     update_heatmap();
+    titleUpdate();
 }
 document.getElementById("attribute1").onchange = function () {
     d3version3.selectAll("#scatter-plot > *").remove();
@@ -12,6 +13,7 @@ document.getElementById("attribute1").onchange = function () {
     createBarPlot();
     updateScoreboard();
     update_heatmap();
+    titleUpdate();
 }
 document.getElementById("attribute2").onchange = function () {
     d3version3.selectAll("#scatter-plot > *").remove();

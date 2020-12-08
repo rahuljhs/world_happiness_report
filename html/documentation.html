@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -16,9 +16,34 @@
         <h1 style="margin-bottom: 5px;">Documentation</h1>
         <h2>Design Process</h2>
             <h4>Questions about the dataset</h4>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Leo duis ut diam quam. Massa placerat duis ultricies lacus sed turpis. Velit ut tortor pretium viverra suspendisse potenti nullam. Integer quis auctor elit sed vulputate mi sit amet. Maecenas accumsan lacus vel facilisis volutpat est velit. Tristique nulla aliquet enim tortor at auctor. Sit amet nisl suscipit adipiscing bibendum. Euismod in pellentesque massa placerat duis ultricies lacus. Elementum sagittis vitae et leo. Justo laoreet sit amet cursus sit amet dictum sit amet. Nisi lacus sed viverra tellus. Morbi tristique senectus et netus et malesuada fames. A pellentesque sit amet porttitor eget. Praesent semper feugiat nibh sed pulvinar proin.
-                </p>
+            <p>
+                In order to begin the design process we crafted 4 main questions to investigate about the dataset.
+                For each of these main questions, we posed an additional 1-2 questions to investigate the main question further.
+                The questions this visualization is designed for the user to investigate are the following:
+            </p>
+            <ol>
+                <li>What country(countries) are the happiest?</li>
+                <ol>
+                    <li>What makes a country happy?</li>
+                    <ol>
+                        <li>Is happiness correlated with X (metric)?</li>
+                    </ol>
+                </ol>
+                <li>What does the global distribution of happiness look like?</li>
+                <ol>
+                    <li>What does the global distribution of X (metric) look like?</li>
+                    <li>Are any metrics clustered in certain areas as the highest/lowest?</li>
+                </ol>
+                <li>Where does X country rank in global happiness?</li>
+                <ol>
+                    <li>Where does X country rank in global Y (metric)?</li>
+                </ol>
+                <li>How do the countries I select compare in overall happiness?</li>
+                <ol>
+                    <li>How do the countries selected compare in X (metric)</li>
+                </ol>
+            </ol>
+
             <h4>Layout</h4>
                 <p>
                     Aliquet nec ullamcorper sit amet. Ornare suspendisse sed nisi lacus sed viverra. Pretium vulputate sapien nec sagittis aliquam malesuada bibendum. Quis ipsum suspendisse ultrices gravida dictum fusce ut placerat. Sed nisi lacus sed viverra tellus in hac. Vel turpis nunc eget lorem dolor. Vitae tortor condimentum lacinia quis vel. Vulputate mi sit amet mauris. Ipsum dolor sit amet consectetur adipiscing. Ultricies mi eget mauris pharetra et ultrices neque ornare. Egestas erat imperdiet sed euismod nisi porta lorem mollis aliquam. Posuere urna nec tincidunt praesent semper feugiat nibh sed pulvinar. Pellentesque diam volutpat commodo sed egestas egestas fringilla. Nulla facilisi nullam vehicula ipsum a arcu cursus. Sed viverra ipsum nunc aliquet bibendum enim facilisis. Est ultricies integer quis auctor elit. Duis convallis convallis tellus id interdum velit. Neque convallis a cras semper. Congue quisque egestas diam in.
@@ -39,6 +64,27 @@
                 providing information and filtering functionality.
             </p>
             <h4>Scatter Plot</h4>
+            <p>
+                The scatter plot was designed to aid the user in the investigation of the questions of “What does the global distribution of
+                X metric look like?” and “How is happiness correlated with X metric?”. To answer the first question, “what does the global
+                distribution of X metric look like?” the user can select the attributes it would like to investigate, whether that’s
+                the overall happiness score, some contributing factor, or any combination thereof. Each country is then plotted as a circle
+                with attribute 1 on the horizontal axis and attribute 2 on the vertical axis. To maintain a consumable distribution of data
+                points on the graph, the axes will auto scale to maximize the distance between data points on the graph along each axis.
+            </p>
+            <p>
+                To answer the second question, “How is happiness correlated with X metric?”, the user can investigate this by setting
+                the attributes accordingly to see by the distribution of the data. They can then determine if there is any perceivable
+                correlation between those attributes. Additionally, the functionality for the user to investigate the correlation of
+                any two variables was built in by plotting 2 attributes rather than just the happiness score vs. a selected attribute.
+            </p>
+            <p>
+                To interact with the data on the scatterplot, the user can mouse over one of the circles representing that
+                datapoint and that point will increase in size and intensity of color. When the user does this, the scoreboard, map,
+                and bar graph will all also simultaneously highlight the element representing that country associated with the point
+                on the scatterplot. This allows the user to see, not only where different countries appear on the scatterplot, but also
+                where they are located on the map and where they rank in the bar graph.
+            </p>
             <h4>Bar Plot</h4>
             <h4>Filters and Legend</h4>
             <p>
