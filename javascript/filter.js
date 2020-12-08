@@ -1,5 +1,4 @@
 document.getElementById("year").onchange = function () {
-    //console.log("year update");
     d3version3.selectAll("#scatter-plot > *").remove();
     d3version3.selectAll("#bar-plot > *").remove();
     createScatterPlot();
@@ -8,7 +7,6 @@ document.getElementById("year").onchange = function () {
     titleUpdate();
 }
 document.getElementById("attribute1").onchange = function () {
-    //console.log("attr1 update");
     d3version3.selectAll("#scatter-plot > *").remove();
     d3version3.selectAll("#bar-plot > *").remove();
     createScatterPlot();
@@ -31,18 +29,15 @@ document.getElementById("region").onchange = function (changeEvent) {
         Object.keys(selectedCountryHash).forEach(selectedCountry => {
             selectedCountryHash[selectedCountry] = true;
         });
-        applySelectedStyles(d3version6.selectAll('#world-map .country.region-enabled'));
     } else {
         regionCountryHash[region].forEach(country => {
             selectedCountryHash[country] = true;
-            applySelectedStyles(d3version6.selectAll(`#world-map .${country}`));
         });
 
         // keys will get all of the countries
         Object.keys(selectedCountryHash).forEach(selectedCountry => {
             if (!regionCountryHash[region].includes(selectedCountry)) {
                 selectedCountryHash[selectedCountry] = false;
-                applyUnselectedStyles(d3version6.selectAll(`#world-map .${selectedCountry}`));
             }
         })
     }
