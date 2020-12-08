@@ -233,7 +233,9 @@ const filterCountryRegion = (newRegion) => {
 };
 
 worldMapPromise.then(data => {
-    createWorldMap(data);
-    update_heatmap();
+    allFilesPromise.then(() => {
+        createWorldMap(data);
+        update_heatmap();
+    })
 });
 
