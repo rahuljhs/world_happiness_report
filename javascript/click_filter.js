@@ -1,4 +1,12 @@
 const filterCountries = (target) => {
+
+    if (Object.values(selectedCountryHash).filter(selected => selected).length === 158) {
+        Object.entries(selectedCountryHash).forEach((keyValArr) => selectedCountryHash[keyValArr[0]] = false);
+        d3version6.selectAll('#world-map .selected').classed('selected', false)
+        d3version6.selectAll('#scatter-plot circle').classed('selected', false)
+        d3version6.selectAll('#bar-plot rect').classed('selected', false)
+    }
+
     const targetClass = target.attr('class');
     const classList = targetClass.split(/[ ,]+/)
     if (targetClass.includes('selected')) {
@@ -15,16 +23,27 @@ const filterCountries = (target) => {
     }
     selectedCountryHash[classList[2]] = !selectedCountryHash[classList[2]];
 
-    let splotCountry = splot.select(`#${classList[2]}`)
-    let bplotCountry = bplot.select(`#bp-${classList[2]}`)
+    if (Object.values(selectedCountryHash).filter(selected => selected).length === 0) {
+        Object.entries(selectedCountryHash).forEach((keyValArr) => selectedCountryHash[keyValArr[0]] = true);
+        d3version6.selectAll('#world-map .region-enabled').classed('selected', true);
+        d3version6.selectAll('#scatter-plot circle').classed('selected', true);
+        d3version6.selectAll('#bar-plot rect').classed('selected', true);
+        d3version6.selectAll('#scatter-plot circle').style('fill', color[2]);
+    } else {
+        let splotCountry = splot.select(`#${classList[2]}`)
+        let bplotCountry = bplot.select(`#bp-${classList[2]}`)
 
-    splotCountry.classed('selected', !splotCountry.classed('selected')).style('fill', color[2]);
-    splot.selectAll(`circle:not(.selected)`).style('fill', "#cccccc");
+        splotCountry.classed('selected', !splotCountry.classed('selected')).style('fill', color[2]);
+        splot.selectAll(`circle:not(.selected)`).style('fill', "#cccccc");
 
-    if (!bplotCountry.empty()) {
-        bplotCountry.classed('selected', !bplotCountry.classed('selected')).style('visibility', 'visible');
-        bplot.selectAll(`rect:not(.selected)`).style('visibility', 'hidden');
+        if (!bplotCountry.empty()) {
+            bplotCountry.classed('selected', !bplotCountry.classed('selected')).style('visibility', 'visible');
+            bplot.selectAll(`rect:not(.selected)`).style('visibility', 'hidden');
+        }
     }
+
+
+
 
     // if all (158) countries are not selected then make all visible
     // if(splot.selectAll(`circle:not(.selected)`).size() === 158) {
