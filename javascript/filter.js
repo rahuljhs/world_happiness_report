@@ -1,5 +1,4 @@
 document.getElementById("year").onchange = function () {
-    //console.log("year update");
     d3version3.selectAll("#scatter-plot > *").remove();
     d3version3.selectAll("#bar-plot > *").remove();
     createScatterPlot();
@@ -7,7 +6,6 @@ document.getElementById("year").onchange = function () {
     update_heatmap();
 }
 document.getElementById("attribute1").onchange = function () {
-    //console.log("attr1 update");
     d3version3.selectAll("#scatter-plot > *").remove();
     d3version3.selectAll("#bar-plot > *").remove();
     createScatterPlot();

@@ -1,9 +1,5 @@
 const filterCountries = (target) => {
     const selectSize = Object.values(selectedCountryHash).filter(selected => selected).length;
-    console.log(selectSize === d3version6.selectAll('#world-map .region-enabled').size());
-    console.log('selectionSize', selectSize);
-    console.log('d3 selected countries', d3version6.selectAll('#world-map .region-enabled').size());
-    console.log('selected hash countries', Object.entries(selectedCountryHash).filter(selected => selected[1]));
 
     if (selectSize === 159 || selectSize === d3version6.selectAll('#world-map .region-enabled').size()) {
         Object.entries(selectedCountryHash).forEach((keyValArr) => selectedCountryHash[keyValArr[0]] = false);

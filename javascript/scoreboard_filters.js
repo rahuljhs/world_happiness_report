@@ -60,7 +60,3 @@ const updateScoreboard = () => {
     d3version6.select('#sb-attr-2')
         .text(`${attr2}:`);
 }
-
-const updateData = () => {
-
-}
