@@ -1,6 +1,5 @@
 const filterCountries = (target) => {
     const selectSize = Object.values(selectedCountryHash).filter(selected => selected).length;
-
     if (selectSize === 159 || selectSize === d3version6.selectAll('#world-map .region-enabled').size()) {
         Object.entries(selectedCountryHash).forEach((keyValArr) => selectedCountryHash[keyValArr[0]] = false);
         d3version6.selectAll('#world-map .selected').classed('selected', false)
@@ -17,18 +16,24 @@ const filterCountries = (target) => {
     } else {
         target.attr('class', `${targetClass} selected`);
     }
+
     selectedCountryHash[classList[2]] = !selectedCountryHash[classList[2]];
 
     if (Object.values(selectedCountryHash).filter(selected => selected).length === 0) {
-        Object.entries(selectedCountryHash).forEach((keyValArr) => selectedCountryHash[keyValArr[0]] = true);
+        // Object.entries(selectedCountryHash).forEach((keyValArr) => {
+        //     selectedCountryHash[keyValArr[0]] = true
+        // });
+        d3version6.selectAll('#world-map .region-enabled').each(d => {
+            selectedCountryHash[d['properties']['name'].toLowerCase().replaceAll(' ', '-')] = true;
+        })
         d3version6.selectAll('#world-map .region-enabled').classed('selected', true);
-        createScatterPlot()
+        // d3version6.selectAll('#scatter-plot circle.selected').classed('selected', false)
+        createScatterPlot();
         d3version6.selectAll('#bar-plot rect').classed('selected', true);
         d3version6.selectAll('#bar-plot rect').style('fill', color[9]);
     } else {
         let splotCountry = splot.select(`#${classList[2]}`)
         let bplotCountry = bplot.select(`#bp-${classList[2]}`)
-
         splotCountry.classed('selected', selectedCountryHash[classList[2]]).style('fill', color[2]);
         splot.selectAll(`circle:not(.selected)`).style('fill', "#cccccc");
 

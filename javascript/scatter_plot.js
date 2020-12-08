@@ -2,10 +2,10 @@ const scatterPlotHeight = 500;
 const scatterPlotWidth = 600;
 const color = ['#7f3b08', '#b35806', '#e08214', '#fdb863', '#fee0b6', '#d8daeb', '#b2abd2', '#8073ac', '#542788', '#2d004b'];
 
-var margin = { top: 50, bottom: 40, left: 70, right: 20 };
+let margin = { top: 50, bottom: 40, left: 70, right: 20 };
 
-var plotht = scatterPlotHeight - margin.top - margin.bottom;
-var plotwt = scatterPlotWidth - margin.left - margin.right;
+let plotht = scatterPlotHeight - margin.top - margin.bottom;
+let plotwt = scatterPlotWidth - margin.left - margin.right;
 
 const splot = d3version6.select('#scatter-plot');
 
@@ -65,87 +65,40 @@ const createScatterPlot = () => {
 
     //set whole number scales
     //figure out the scale of x & y axe
-    var xscale = plotwt/Math.ceil(xmax);
-    var yscale = plotht/Math.ceil(ymax);
+    let xscale = plotwt/Math.ceil(xmax);
+    let yscale = plotht/Math.ceil(ymax);
 
     //plot the datapoints
     for (let x = 0; x < dataHash[year].length; x++) {
-        if (reg === "All") {
-            splot.append('circle')
-                .attr('cx', (dataHash[year][x][attr1]) * xscale + margin.left)
-                .attr('cy', plotht + margin.top - (dataHash[year][x][attr2] * yscale))
-                .attr('r', '4')
-                .attr('fill', color[2])
-                .attr('opacity', '0.5')
-                .attr('class', 'selected')
-                .attr('id', dataHash[year][x]['Country'].toLowerCase().replaceAll(' ', '-'))
-                .on("mouseover", function (event, d) {
-                    let temp = d3version6.select(this).attr('id');
-                    updateOn(temp, selectedCountryHash[temp]);
-                })
-                .on("mouseout", function (d) {
-                    let temp = d3version6.select(this).attr('id');
-                    updateOff(temp, selectedCountryHash[temp]);
-                });
+        let color = "#cccccc";
+        let selected = selectedCountryHash[dataHash[year][x]['Country'].toLowerCase().replaceAll(' ', '-')];
+        if (selected) {
+          color = colors[2];
         }
-        else {
-            if (dataHash[year][x]['Region'] === reg) {
-                if (selectedCountryHash[dataHash[year][x]['Country'].toLowerCase().replaceAll(' ', '-')]) {
-                    splot.append('circle')
-                        .attr('cx', (dataHash[year][x][attr1]) * xscale + margin.left)
-                        .attr('cy', plotht + margin.top - (dataHash[year][x][attr2] * yscale))
-                        .attr('r', '4')
-                        .attr('fill', color[2])
-                        .attr('opacity', '0.5')
-                        .attr('class', 'selected')
-                        .attr('id', dataHash[year][x]['Country'].toLowerCase().replaceAll(' ', '-'))
-                        .on("mouseover", function (event, d) {
-                            let temp = d3version6.select(this).attr('id');
-                            updateOn(temp, selectedCountryHash[temp]);
-                        })
-                        .on("mouseout", function (d) {
-                            let temp = d3version6.select(this).attr('id');
-                            updateOff(temp, selectedCountryHash[temp]);
-                        });
+
+        splot.append('circle')
+            .attr('cx', (dataHash[year][x][attr1]) * xscale + margin.left)
+            .attr('cy', plotht + margin.top - (dataHash[year][x][attr2] * yscale))
+            .attr('r', '4')
+            .attr('fill', color)
+            .attr('opacity', '0.5')
+            .attr('class', d => selected ? 'selected' : '')
+            .attr('id', d => {
+                let id = dataHash[year][x]['Country'].toLowerCase().replaceAll(' ', '-');
+                let existingElement = d3version6.select(`#scatter-plot #${id}`);
+                if(!existingElement.empty()) {
+                    existingElement.remove();
                 }
-                else {
-                    splot.append('circle')
-                        .attr('cx', (dataHash[year][x][attr1]) * xscale + margin.left)
-                        .attr('cy', plotht + margin.top - (dataHash[year][x][attr2] * yscale))
-                        .attr('r', '4')
-                        .attr('fill', "#cccccc")
-                        .attr('opacity', '0.5')
-                        .attr('class', 'selected')
-                        .attr('id', dataHash[year][x]['Country'].toLowerCase().replaceAll(' ', '-'))
-                        .on("mouseover", function (event, d) {
-                            let temp = d3version6.select(this).attr('id');
-                            updateOn(temp, selectedCountryHash[temp]);
-                        })
-                        .on("mouseout", function (d) {
-                            let temp = d3version6.select(this).attr('id');
-                            updateOff(temp, selectedCountryHash[temp]);
-                        });
-                }
-            }
-            else {
-                splot.append('circle')
-                    .attr('cx', (dataHash[year][x][attr1]) * xscale + margin.left)
-                    .attr('cy', plotht + margin.top - (dataHash[year][x][attr2] * yscale))
-                    .attr('r', '4')
-                    .attr('fill', "#cccccc")
-                    .attr('opacity', '0.5')
-                    .attr('class', 'selected')
-                    .attr('id', dataHash[year][x]['Country'].toLowerCase().replaceAll(' ', '-'))
-                    .on("mouseover", function (event, d) {
-                        let temp = d3version6.select(this).attr('id');
-                        updateOn(temp, selectedCountryHash[temp]);
-                    })
-                    .on("mouseout", function (d) {
-                        let temp = d3version6.select(this).attr('id');
-                        updateOff(temp, selectedCountryHash[temp]);
-                    });
-            }
-        }
+                return id;
+            })
+            .on("mouseover", function (event, d) {
+                let temp = d3version6.select(this).attr('id');
+                updateOn(temp, selectedCountryHash[temp]);
+            })
+            .on("mouseout", function (d) {
+                let temp = d3version6.select(this).attr('id');
+                updateOff(temp, selectedCountryHash[temp]);
+            });
     }
 
     //axes labels & title
@@ -171,10 +124,10 @@ const createScatterPlot = () => {
 
     //axes ticks
     //x-axis
-    var xAxisScale = d3version3.scale.linear()
+    let xAxisScale = d3version3.scale.linear()
         .domain([0, Math.ceil(xmax)])
         .range([margin.left, margin.left + plotwt]);
-    var xAxis = d3version3.svg.axis()
+    let xAxis = d3version3.svg.axis()
         .scale(xAxisScale)
         .orient("bottom")
         .ticks(10);
@@ -183,10 +136,10 @@ const createScatterPlot = () => {
         .attr('transform', 'translate(0, ' + (margin.top + plotht) + ')')
         .call(xAxis);
     //y-axis
-    var yAxisScale = d3version3.scale.linear()
+    let yAxisScale = d3version3.scale.linear()
         .domain([0, Math.ceil(ymax)])
         .range([plotht + margin.top, margin.top]);
-    var yAxis = d3version3.svg.axis()
+    let yAxis = d3version3.svg.axis()
         .scale(yAxisScale)
         .orient("left")
         .ticks(10);
