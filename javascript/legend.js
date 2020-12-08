@@ -44,17 +44,24 @@ legend.append('g')
     .attr("transform", "rotate(-45)");
 
 
-//scatter plot title
+//legend title
 
 attr1 = document.getElementById("attribute1").value;
 year = document.getElementById("year").value;
 
 legend.append('text')
     .text("Percentile of " + attr1 + " in " + year)
+    .attr('id', 'title')
     .attr('x', legWidth/2)
     .attr('y', legHeight - 20)
-    .style('font-size', "20px")
+    .style('font-size', "16px")
     .style('text-anchor', 'middle');
+
+const titleUpdate = () => {
+    attr1 = document.getElementById("attribute1").value;
+    year = document.getElementById("year").value;
+    legend.selectAll('#title').text("Percentile of " + attr1 + " in " + year);
+}
 
 //legend.append('circle')
 //    .attr('cx', 300)
