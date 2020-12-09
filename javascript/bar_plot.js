@@ -26,14 +26,6 @@ const createBarPlot = () => {
         .attr('x', barMargin.left + 5)
         .attr('y', barMargin.top - 5);
 
-    bplot.append('line')
-        .attr('x1', barMargin.left + 2)
-        .attr('x2', barMargin.left + (attr1.length + countryAttr.length + 11) * 10)
-        .attr('y1', barMargin.top)
-        .attr('y2', barMargin.top)
-        .style('stroke', 'gray')
-        .style('stroke-width', '1');
-
     d3version6.select('#bar-plot')
         .style('width', `${barPlotWidth}px`)
         .style('height', `${barPlotHeight}px`)
@@ -44,7 +36,7 @@ const createBarPlot = () => {
     //y-axis label
     bplot.append('text')
         .text(attr1)
-        .style('font-size', 18)
+        .style('font-size', '16px')
         .style('text-anchor', 'center')
         .attr('transform', 'translate(' + ((barMargin.left / 2) - 10) + ',' + (barPlotHeight - barMargin.bottom) + ') rotate(-90)');
 
@@ -57,6 +49,7 @@ const createBarPlot = () => {
             xmin = dataHash[year][x][attr1];
         }
     }
+    console.log(xmax)
 
     if (reg === 'All') {
         for (let x = 0; x < dataHash[year].length; x++) {
@@ -120,7 +113,7 @@ const createBarPlot = () => {
     bplot.append('text')
         .text(countryAttr)
         .style('text-anchor', 'middle')
-        .style('font-size', 20)
+        .style('font-size', '16px')
         .attr('x', barMargin.left + (xbarscale * selectSize) / 2)
         .attr('y', barPlotHeight - barMargin.bottom + 90);
 
@@ -131,29 +124,17 @@ const createBarPlot = () => {
         .attr('x', barMargin.left + (xbarscale * selectSize) / 2 - 150)
         .attr('y', barPlotHeight - barMargin.bottom + 30);
 
-    let countryBox = bplot.append('line')
-        .attr('x1', barMargin.left + (xbarscale * selectSize) / 2 - 155)
-        .attr('x2', barMargin.left + (xbarscale * selectSize) / 2)
-        .attr('y1', barPlotHeight - barMargin.bottom + 35)
-        .attr('y2', barPlotHeight - barMargin.bottom + 35)
-        .style('stroke', 'none')
-
     let countryLabelOn = (countryName, height) => {
         if (selectSize > 50) {
             countryLabel
                 .text('Selected Country: ' + countryName.toUpperCase() + ' (' + d3version3.round(height, 3) + ')')
                 .style('opacity', 1);
-            countryBox
-                .style('stroke', 'gray')
-                .attr('x2', barMargin.left + (xbarscale * selectSize) / 2 - 155 + (countryName.length + 21) * 12)
         }
     }
 
     let countryLabelOff = () => {
         countryLabel
             .style('opacity', 0);
-        countryBox
-            .style('stroke', 'none');
     }
 
     if (selectSize < 50) {
