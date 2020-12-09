@@ -49,7 +49,6 @@ const createBarPlot = () => {
             xmin = dataHash[year][x][attr1];
         }
     }
-    console.log(xmax)
 
     if (reg === 'All') {
         for (let x = 0; x < dataHash[year].length; x++) {
