@@ -75,11 +75,18 @@
         <h2>Rationale</h2>
             <h4>World Map</h4>
             <p>
-                When tackling the questions posed by our dataset, the most obvious visualization we thought to implement was
-                a global view.  First, we wanted the ability for the world map to encode a variable via color.  After iterating
-                through functionality ideas, we settled on using the world map as a filtering tool that coordinated
-                with the other assisting visualizations.  As the central visualization, the world map immediately draws attention while both
-                providing information and filtering functionality.
+                When tackling the questions posed by our dataset, the most obvious visualization we thought to implement was a global view. First, we wanted the ability for the world map to encode a variable via color. After iterating through functionality ideas, we settled on using the world map as a filtering tool that coordinated with the other assisting visualizations. As the central visualization, the world map immediately draws attention while both providing information and filtering functionality.
+            </p>
+            <p>
+                World Map is used here to represent happiness score and 7 different attributes which constitutes happiness score. In order to represent the data we first needed a World Map to be plotted on the SVG. Based on our search over the web, we found different datasets to plot world map but none of them were directly useable without any sort of transformation. We had to write a custom parser in Python to transform world dataset to match data represented in happiness score report.
+            </p>
+            <p>
+                In terms of different interactions we can perform on world map:
+                <ul>
+                        <li>Mouse Hover : Changes the opacity of colour on world map to showcase selection, and other visualisations (scatter plot, bar chart, scoreboard) are simultaneously highlighted with relevant information.</li>
+                        <li>Selection : Only manually selected countries is highlighted and rest of world map has no colour, similar behaviour can be observed on scatterplot and bar graph.</li>
+                        <li>Colour Patterns : Colour pattern on world map for selected attributed is fetched from colour brewer.</li>
+                </ul>
             </p>
             <h4>Scatter Plot</h4>
             <p>
@@ -115,10 +122,16 @@
             </p>
             <h4>Filters and Legend</h4>
             <p>
-                Scelerisque in dictum non consectetur. Porttitor rhoncus dolor purus non enim praesent. Eget mi proin sed libero enim sed faucibus turpis in. In est ante in nibh mauris. Ut faucibus pulvinar elementum integer enim neque volutpat ac tincidunt. Eu augue ut lectus arcu. Eget arcu dictum varius duis at consectetur lorem. Tincidunt eget nullam non nisi est sit amet facilisis. Pharetra convallis posuere morbi leo. Sem nulla pharetra diam sit. Dignissim convallis aenean et tortor at risus. Tempor orci dapibus ultrices in iaculis nunc. Urna condimentum mattis pellentesque id nibh tortor id. Ut faucibus pulvinar elementum integer enim neque volutpat ac. Aliquam id diam maecenas ultricies mi eget mauris. Auctor eu augue ut lectus arcu bibendum at.
-            </p>
-            <p>
-                Id aliquet lectus proin nibh nisl condimentum. Egestas egestas fringilla phasellus faucibus scelerisque eleifend. Proin sed libero enim sed faucibus turpis in eu mi. Arcu felis bibendum ut tristique. Morbi blandit cursus risus at ultrices mi. Ut lectus arcu bibendum at varius vel. Commodo sed egestas egestas fringilla phasellus faucibus scelerisque eleifend donec. Id aliquet lectus proin nibh nisl condimentum id venenatis a. Quisque non tellus orci ac auctor augue mauris. In dictum non consectetur a. Orci nulla pellentesque dignissim enim sit amet venenatis urna cursus. Aliquet eget sit amet tellus cras adipiscing enim. Risus at ultrices mi tempus imperdiet nulla malesuada pellentesque. Sed adipiscing diam donec adipiscing tristique risus nec feugiat. Pellentesque diam volutpat commodo sed egestas egestas fringilla phasellus faucibus. Condimentum mattis pellentesque id nibh tortor. Pulvinar elementum integer enim neque volutpat ac tincidunt vitae. Interdum posuere lorem ipsum dolor sit amet consectetur adipiscing elit. Nisl condimentum id venenatis a condimentum vitae sapien pellentesque.
+                Filters :
+                <ul>
+                    <li>Year : To select data for that specific year, Defaults to 2015</li>
+                    <li>Attribute 1 : To select 1 of 8 attribute, selecting this attribute changes data on Scoreboard, World Map, Scatter Plot and Bar Plot</li>
+                    <li>Attribute 2 : To select 1 of 8 attribute, selecting this attribute changes data on scatterplot so we can compare and contrast against Attribute 1, Defaults to “Economy (GDP per Capita)”</li>
+                    <li>Region: You can select 10 different regions across the world to see those regions across all visualisations. Defaults to “All”</li>
+                    <li>Reset Button : To reset all the filters.</li>
+                </ul>
+                Legend : <br>
+                In terms of legend you can see 10 colour palette taken from colour brewer, representing different percentile of attribute1. Colour palette use here is colour blind safe.
             </p>
 
         <h2>Discoveries by Visualization</h2>
@@ -134,6 +147,14 @@
                         </ol>
                     </ol>
             </ol>
+            <div style="display:flex">
+                <div>
+                    <img src="../assets/1.1.png" width="100%" alt="1.1" >
+                </div>
+                <div>
+                    <img src="../assets/1.2.png" width="100%" alt="1.2" >
+                </div>
+            </div>
                 <p>
                     By using bar plot, it is apparent that (by ranking) Switzerland (2015), Denmark (2016), Norway (2017), and Finland (2018, 2019) have the highest happiness ratings for each year. This is determined by cycling through different years with attribute 1 set on ‘Happiness Rating’. Though happiness is correlated to each metric (happiness score is a compilation of all other metrics), functionally happiness is dependent on the country. Happiness scores were polled, and any lack of direct correlation between the other 6 factors and happiness is combined in residual value ‘dystopia residual’. Thus, it is possible to note the greatest outliers between the metrics and the polled values by observing the ‘dystopia residual’ as attribute 1.
                 </p>
@@ -144,6 +165,16 @@
                             <li>Are any metrics clustered in certain areas as the highest/lowest?</li>
                         </ol>
                 </ol>
+
+                <div style="display:flex">
+                    <div>
+                        <img src="../assets/2.1.png" width="100%" alt="2.1" >
+                    </div>
+                    <div>
+                        <img src="../assets/2.2.png" width="100%" alt="2.2" >
+                    </div>
+                </div>
+
                 <p>
                     The global distribution of happiness favors Europe, North Ameria, Australia, and sections of South America. Most metrics followed this same pattern, except trust (government corruption) and generosity (social safety nets) were primarily centralized in southeast Asia/Austalia, Canada, and Scandanavia. The heat map is a useful tool for determining regional distributions of any of the 6 metrics.
                 </p>
@@ -153,6 +184,11 @@
                             <li>Where does X country rank in global Y (metric)?</li>
                         </ol>
                 </ol>
+                <div style="margin-left: 25%">
+                    <div>
+                        <img src="../assets/3.png" width="70%" alt="3" >
+                    </div>
+                </div>
                 <p>
                     It is possible to determine the rank of any country by selecting the metric and finding it on the scatter plot of bar plot (bar plot is sorted). The corresponding rank is determined by position in the bar plot.
                 </p>
@@ -162,6 +198,11 @@
                         <li>How do the countries selected compare in X (metric)</li>
                     </ol>
                 </ol>
+                <div style="margin-left: 25%">
+                    <div>
+                        <img src="../assets/4.png" width="70%" alt="4" >
+                    </div>
+                </div>
                 <p>
                     Countries can be selected by clicking on their respective locations on the world map. By doing so, they are highlighted in the map, scatterplot, and bar plot. It is easy to compare these values using the 3 visualizations. 
                 </p>
